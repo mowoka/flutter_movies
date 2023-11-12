@@ -25,6 +25,8 @@ class _CustomScaffoldState extends State<CustomScaffold> {
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             const CustomAppBar(),
             widget.children,

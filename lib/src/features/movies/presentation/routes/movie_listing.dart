@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movie_moka/src/features/movies/presentation/widget/movie_listing_carousel.dart';
 
 class MovieListing extends StatefulWidget {
   const MovieListing({super.key});
@@ -13,8 +14,14 @@ class MovieListing extends StatefulWidget {
 class _MovieListingState extends State<MovieListing> {
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text('Movie Lisitng'),
+    return const SingleChildScrollView(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          MovieListingCarousel(),
+        ],
+      ),
     );
   }
 }
