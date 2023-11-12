@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
+import 'package:movie_moka/src/core/utils/get_route_location.dart';
 import 'package:movie_moka/src/core/utils/material_color.dart';
 import 'package:movie_moka/src/core/widget/scaffold.dart';
 import 'package:movie_moka/src/features/movies/data/repository/movie_listing_impl.dart';
@@ -120,8 +121,9 @@ class _MyAppState extends State<MyApp> {
         GoRoute(
           name: MovieListing.routeName,
           path: MovieListing.routePath,
-          builder: (context, state) => const CustomScaffold(
-            children: MovieListing(),
+          builder: (context, state) => CustomScaffold(
+            routeName: getLocationRoute(MovieListing.routeName),
+            children: const MovieListing(),
           ),
         ),
       ],

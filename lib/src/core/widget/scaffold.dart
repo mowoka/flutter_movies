@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:movie_moka/src/core/widget/app_bar.dart';
 import 'package:movie_moka/src/core/widget/bottom_navigation.dart';
 
 class CustomScaffold extends StatefulWidget {
   const CustomScaffold({
     super.key,
     required this.children,
+    required this.routeName,
   });
 
   final Widget children;
+  final String routeName;
 
   @override
   State<CustomScaffold> createState() => _CustomScaffoldState();
@@ -18,9 +21,19 @@ class _CustomScaffoldState extends State<CustomScaffold> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        child: widget.children,
+        padding: const EdgeInsets.all(0),
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        child: Column(
+          children: [
+            const CustomAppBar(),
+            widget.children,
+          ],
+        ),
       ),
-      bottomNavigationBar: const CustomBottomNavigation(),
+      bottomNavigationBar: CustomBottomNavigation(
+        routeName: widget.routeName,
+      ),
     );
   }
 }
