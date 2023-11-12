@@ -1,0 +1,7 @@
+{
+  "@@locale": "en",
+  "helloWorld": "Moka Movies",
+  "@helloWorld": {
+    "description": "Flutter mobile apps for reserve movies at cimahi"
+  }
+}
