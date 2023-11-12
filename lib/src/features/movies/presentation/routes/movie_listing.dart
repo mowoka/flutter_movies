@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_moka/src/features/movies/presentation/widget/movie_listing_carousel.dart';
+import 'package:movie_moka/src/features/movies/presentation/widget/movie_listing_now_playing.dart';
 
 class MovieListing extends StatefulWidget {
   const MovieListing({super.key});
@@ -20,6 +21,7 @@ class _MovieListingState extends State<MovieListing> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           MovieListingCarousel(),
+          MovieListingNowPlaying(),
         ],
       ),
     );

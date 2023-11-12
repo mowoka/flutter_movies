@@ -127,7 +127,9 @@ class _MovieListingCarouselState extends State<MovieListingCarousel> {
           ],
         ),
         const SizedBox(height: 20),
-        const Divider(),
+        const Divider(
+          color: Colors.black45,
+        ),
       ],
     );
   }
