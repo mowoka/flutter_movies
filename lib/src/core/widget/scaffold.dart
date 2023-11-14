@@ -29,7 +29,7 @@ class _CustomScaffoldState extends State<CustomScaffold> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             const CustomAppBar(),
-            widget.children,
+            Expanded(child: widget.children),
           ],
         ),
       ),

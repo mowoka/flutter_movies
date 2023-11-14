@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movie_moka/src/features/movies/presentation/widget/movie_listing_carousel.dart';
 import 'package:movie_moka/src/features/movies/presentation/widget/movie_listing_now_playing.dart';
+import 'package:movie_moka/src/features/movies/presentation/widget/movie_listing_promo.dart';
 
 class MovieListing extends StatefulWidget {
   const MovieListing({super.key});
@@ -22,6 +23,7 @@ class _MovieListingState extends State<MovieListing> {
         children: [
           MovieListingCarousel(),
           MovieListingNowPlaying(),
+          MovieListingPromo(),
         ],
       ),
     );
