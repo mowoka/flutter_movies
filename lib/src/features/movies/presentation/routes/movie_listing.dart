@@ -3,6 +3,7 @@ import 'package:movie_moka/src/features/movies/presentation/widget/movie_listing
 import 'package:movie_moka/src/features/movies/presentation/widget/movie_listing_food_drinks.dart';
 import 'package:movie_moka/src/features/movies/presentation/widget/movie_listing_now_playing.dart';
 import 'package:movie_moka/src/features/movies/presentation/widget/movie_listing_promo.dart';
+import 'package:movie_moka/src/features/movies/presentation/widget/movie_listing_special_feature.dart';
 
 class MovieListing extends StatefulWidget {
   const MovieListing({super.key});
@@ -26,6 +27,7 @@ class _MovieListingState extends State<MovieListing> {
           MovieListingNowPlaying(),
           MovieListingPromo(),
           MovieListingFoodAndDrinks(),
+          MovieListingSpecialFeature(),
         ],
       ),
     );
