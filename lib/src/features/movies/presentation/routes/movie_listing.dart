@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_moka/src/features/movies/presentation/widget/movie_listing_carousel.dart';
+import 'package:movie_moka/src/features/movies/presentation/widget/movie_listing_food_drinks.dart';
 import 'package:movie_moka/src/features/movies/presentation/widget/movie_listing_now_playing.dart';
 import 'package:movie_moka/src/features/movies/presentation/widget/movie_listing_promo.dart';
 
@@ -24,6 +25,7 @@ class _MovieListingState extends State<MovieListing> {
           MovieListingCarousel(),
           MovieListingNowPlaying(),
           MovieListingPromo(),
+          MovieListingFoodAndDrinks(),
         ],
       ),
     );

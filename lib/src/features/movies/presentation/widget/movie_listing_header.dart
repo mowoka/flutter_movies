@@ -7,12 +7,14 @@ class MovieListingHeader extends StatelessWidget {
     super.key,
     required this.title,
     required this.subTitle,
-    required this.onTap,
+    this.onTap,
+    this.showButton = true,
   });
 
   final String title;
   final String subTitle;
-  final OnTap onTap;
+  final OnTap? onTap;
+  final bool showButton;
 
   @override
   Widget build(BuildContext context) {
@@ -46,22 +48,23 @@ class MovieListingHeader extends StatelessWidget {
               ],
             ),
           ),
-          InkWell(
-            onTap: onTap,
-            child: const Row(children: [
-              Text(
-                'VIEW ALL',
-                style: TextStyle(
-                  fontWeight: FontWeight.w400,
+          if (showButton)
+            InkWell(
+              onTap: onTap,
+              child: const Row(children: [
+                Text(
+                  'VIEW ALL',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w400,
+                  ),
                 ),
-              ),
-              Icon(
-                Icons.keyboard_arrow_right,
-                color: Colors.red,
-                size: 30,
-              )
-            ]),
-          ),
+                Icon(
+                  Icons.keyboard_arrow_right,
+                  color: Colors.red,
+                  size: 30,
+                )
+              ]),
+            ),
         ],
       ),
     );
