@@ -1,6 +1,10 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:movie_moka/src/features/movies/presentation/providers/movie_listing_provider.dart';
+import 'package:movie_moka/src/features/movies/presentation/routes/movies_listing_search_location.dart';
+import 'package:provider/provider.dart';
 
 class MovieListingCarousel extends StatefulWidget {
   const MovieListingCarousel({super.key});
@@ -41,30 +45,47 @@ class _MovieListingCarouselState extends State<MovieListingCarousel> {
               children: [
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 15),
-                  child: const Row(
+                  child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.location_pin,
                         size: 20,
                         color: Colors.white,
                       ),
-                      Padding(
-                        padding: EdgeInsets.only(left: 5),
-                        child: Text(
-                          'Cimahi',
-                          style: TextStyle(
-                            decoration: TextDecoration.underline,
-                            color: Colors.white,
-                          ),
+                      SizedBox(
+                        child: Consumer<MovieListingProvider>(
+                          builder: (context, notifier, child) {
+                            return InkWell(
+                              onTap: () {
+                                GoRouter.of(context).pushNamed(
+                                  MovieListingSearchLocation.routeName,
+                                );
+                              },
+                              child: const Row(
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.only(left: 5),
+                                    child: Text(
+                                      'Cimahi',
+                                      style: TextStyle(
+                                        decoration: TextDecoration.underline,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                  Icon(
+                                    Icons.keyboard_arrow_down,
+                                    size: 20,
+                                    color: Colors.white,
+                                  )
+                                ],
+                              ),
+                            );
+                          },
                         ),
                       ),
-                      Icon(
-                        Icons.keyboard_arrow_down,
-                        size: 20,
-                        color: Colors.white,
-                      )
                     ],
                   ),
                 ),
