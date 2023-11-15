@@ -8,7 +8,7 @@ import 'package:movie_moka/src/core/widget/scaffold.dart';
 import 'package:movie_moka/src/features/movies/data/repository/movie_listing_impl.dart';
 import 'package:movie_moka/src/features/movies/presentation/providers/movie_listing_provider.dart';
 import 'package:movie_moka/src/features/movies/presentation/routes/movie_listing.dart';
-import 'package:movie_moka/src/features/movies/presentation/routes/movies_listing_search_location.dart';
+import 'package:movie_moka/src/features/movies/presentation/routes/movie_listing_search_location.dart';
 import 'package:provider/provider.dart';
 
 /// The Widget that configures your application.

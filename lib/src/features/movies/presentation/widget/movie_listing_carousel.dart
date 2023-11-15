@@ -3,7 +3,7 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:movie_moka/src/features/movies/presentation/providers/movie_listing_provider.dart';
-import 'package:movie_moka/src/features/movies/presentation/routes/movies_listing_search_location.dart';
+import 'package:movie_moka/src/features/movies/presentation/routes/movie_listing_search_location.dart';
 import 'package:provider/provider.dart';
 
 class MovieListingCarousel extends StatefulWidget {
