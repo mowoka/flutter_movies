@@ -41,11 +41,21 @@ class _MovieListingSearchLocationState
     'Tegal'
   ];
 
-  List<String> putCurrentLocationToFirstList(String currentLocation) {
+  List<String> customizeLocations(
+    String currentLocation,
+    String searchKeyword,
+  ) {
     List<String> tempLocation =
         locations.where((element) => element != currentLocation).toList();
+    // to set current location on top array
     tempLocation.insert(0, currentLocation);
-    return tempLocation;
+    if (searchKeyword.isEmpty) return tempLocation;
+    // to filter search keyword
+    final filterLocation = tempLocation
+        .where((element) =>
+            element.toLowerCase().contains(searchKeyword.toLowerCase()))
+        .toList();
+    return filterLocation;
   }
 
   @override
@@ -55,8 +65,9 @@ class _MovieListingSearchLocationState
       body: SafeArea(
         child: Consumer<MovieListingProvider>(
           builder: (context, notifier, child) {
-            final customLocation = putCurrentLocationToFirstList(
+            final customLocation = customizeLocations(
               notifier.location,
+              notifier.locationSearchKeyword,
             );
 
             return Container(
@@ -64,7 +75,12 @@ class _MovieListingSearchLocationState
               child: Column(
                 children: [
                   const SearchLocationHeader(),
-                  const SearchWidget(),
+                  SearchWidget(
+                    searchKeyword: notifier.locationSearchKeyword,
+                    onChangeSearch: (value) {
+                      notifier.updateLocationSearchKeyword(value);
+                    },
+                  ),
                   const SizedBox(height: 5),
                   Expanded(
                     child: Padding(
@@ -73,9 +89,12 @@ class _MovieListingSearchLocationState
                       child: ListView.separated(
                         itemCount: customLocation.length,
                         itemBuilder: (BuildContext context, int index) {
+                          final isCurrentLocation =
+                              customLocation[index] == notifier.location;
                           return InkWell(
                             onTap: () {
                               notifier.updateLocation(customLocation[index]);
+                              notifier.resetLocationSearchKeyword();
                               GoRouter.of(context).pop();
                             },
                             child: Container(
@@ -91,14 +110,14 @@ class _MovieListingSearchLocationState
                                       Text(
                                         customLocation[index],
                                         style: TextStyle(
-                                          color: index == 0
+                                          color: isCurrentLocation
                                               ? Colors.red
                                               : Colors.black,
                                           fontSize: 14,
                                           fontWeight: FontWeight.w500,
                                         ),
                                       ),
-                                      if (index == 0) ...[
+                                      if (isCurrentLocation) ...[
                                         const SizedBox(width: 5),
                                         const Icon(
                                           Icons.circle,
@@ -139,10 +158,16 @@ class _MovieListingSearchLocationState
   }
 }
 
+typedef OnChangeSearch = Function(String value);
+
 class SearchWidget extends StatelessWidget {
   const SearchWidget({
     super.key,
+    required this.searchKeyword,
+    required this.onChangeSearch,
   });
+  final String searchKeyword;
+  final OnChangeSearch onChangeSearch;
 
   @override
   Widget build(BuildContext context) {
@@ -178,7 +203,10 @@ class SearchWidget extends StatelessWidget {
                 disabledBorder: InputBorder.none,
                 hintText: 'Search',
               ),
-              onChanged: (value) {},
+              initialValue: searchKeyword,
+              onChanged: (value) {
+                onChangeSearch(value);
+              },
             ),
           ),
         ],

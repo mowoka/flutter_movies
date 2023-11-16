@@ -21,6 +21,11 @@ class MovieListingProvider extends ChangeNotifier {
     return getMovieListing.execute();
   }
 
+  void updateLocationSearchKeyword(String value) async {
+    _locationSearchKeyword = value;
+    notifyListeners();
+  }
+
   void resetLocationSearchKeyword() async {
     _locationSearchKeyword = '';
     notifyListeners();
