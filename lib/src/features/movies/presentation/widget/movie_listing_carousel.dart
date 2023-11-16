@@ -7,7 +7,12 @@ import 'package:movie_moka/src/features/movies/presentation/routes/movie_listing
 import 'package:provider/provider.dart';
 
 class MovieListingCarousel extends StatefulWidget {
-  const MovieListingCarousel({super.key});
+  const MovieListingCarousel({
+    super.key,
+    required this.location,
+  });
+
+  final String location;
 
   @override
   State<MovieListingCarousel> createState() => _MovieListingCarouselState();
@@ -63,19 +68,19 @@ class _MovieListingCarouselState extends State<MovieListingCarousel> {
                                   MovieListingSearchLocation.routeName,
                                 );
                               },
-                              child: const Row(
+                              child: Row(
                                 children: [
                                   Padding(
-                                    padding: EdgeInsets.only(left: 5),
+                                    padding: const EdgeInsets.only(left: 5),
                                     child: Text(
-                                      'Cimahi',
-                                      style: TextStyle(
+                                      widget.location,
+                                      style: const TextStyle(
                                         decoration: TextDecoration.underline,
                                         color: Colors.white,
                                       ),
                                     ),
                                   ),
-                                  Icon(
+                                  const Icon(
                                     Icons.keyboard_arrow_down,
                                     size: 20,
                                     color: Colors.white,
