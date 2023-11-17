@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
+import 'package:movie_moka/src/core/presentation/provider/bottom_menu_provider.dart';
 import 'package:movie_moka/src/core/utils/get_route_location.dart';
 import 'package:movie_moka/src/core/utils/material_color.dart';
-import 'package:movie_moka/src/core/widget/scaffold.dart';
+import 'package:movie_moka/src/core/presentation/widget/scaffold.dart';
+import 'package:movie_moka/src/features/menu/presentation/routes/menu.dart';
 import 'package:movie_moka/src/features/movies/data/repository/movie_listing_impl.dart';
 import 'package:movie_moka/src/features/movies/presentation/providers/movie_listing_provider.dart';
 import 'package:movie_moka/src/features/movies/presentation/routes/movie_listing.dart';
@@ -23,6 +25,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   late final GoRouter _router;
+  late final BottomMenuProvier _bottomMenuProvier;
   late final MovieListingProvider _movieListingProvider;
 
   @override
@@ -45,12 +48,16 @@ class _MyAppState extends State<MyApp> {
 
     // register provider
     _movieListingProvider = MovieListingProvider(repository: movieRepo);
+    _bottomMenuProvier = BottomMenuProvier();
   }
 
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider<BottomMenuProvier>(
+          create: (context) => _bottomMenuProvier,
+        ),
         ChangeNotifierProvider<MovieListingProvider>(
           create: (context) => _movieListingProvider,
         ),
@@ -157,6 +164,14 @@ class _MyAppState extends State<MyApp> {
             ),
           ],
         ),
+        GoRoute(
+          name: MenuRoute.routeName,
+          path: MenuRoute.routePath,
+          builder: (context, state) => CustomScaffold(
+            routeName: getLocationRoute(MenuRoute.routeName),
+            children: const MenuRoute(),
+          ),
+        )
       ],
     );
 
