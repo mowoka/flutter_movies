@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:movie_moka/src/core/presentation/provider/bottom_menu_provider.dart';
 import 'package:movie_moka/src/core/presentation/widget/app_bar.dart';
 import 'package:movie_moka/src/core/presentation/widget/bottom_navigation.dart';
+import 'package:movie_moka/src/core/presentation/widget/modal_ticket_options.dart';
 import 'package:movie_moka/src/features/menu/presentation/routes/menu.dart';
 import 'package:movie_moka/src/features/movies/presentation/routes/movie_listing.dart';
 import 'package:provider/provider.dart';
@@ -40,6 +41,7 @@ class _CustomScaffoldState extends State<CustomScaffold> {
                     case 0:
                       return const MovieListing();
                     case 1:
+                      // ticket use modal so this is return anything you wants;
                       return const MovieListing();
                     case 2:
                       return const MovieListing();
@@ -65,6 +67,25 @@ class _CustomScaffoldState extends State<CustomScaffold> {
           return CustomBottomNavigation(
             activeMenu: notifier.activeMenuIndex,
             onTapNavigation: (index) {
+              if (index == 1) {
+                // show bottom modal because ticket have not screen
+                showModalBottomSheet(
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.vertical(
+                        top: Radius.circular(30),
+                      ),
+                    ),
+                    clipBehavior: Clip.antiAliasWithSaveLayer,
+                    isScrollControlled: true,
+                    constraints: const BoxConstraints(
+                      maxHeight: 300,
+                    ),
+                    context: context,
+                    builder: (BuildContext context) {
+                      return const ModalTicketOptions();
+                    });
+                return;
+              }
               final provider = Provider.of<BottomMenuProvier>(
                 context,
                 listen: false,
