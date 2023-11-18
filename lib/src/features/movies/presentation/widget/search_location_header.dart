@@ -14,9 +14,9 @@ class SearchLocationHeader extends StatelessWidget {
             onTap: () {
               GoRouter.of(context).pop();
             },
-            child: const SizedBox(
-              width: 20,
-              child: Icon(
+            child: Container(
+              padding: const EdgeInsets.all(5),
+              child: const Icon(
                 Icons.arrow_back,
                 size: 30,
               ),

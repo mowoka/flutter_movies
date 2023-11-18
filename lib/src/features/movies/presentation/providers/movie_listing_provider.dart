@@ -10,14 +10,20 @@ class MovieListingProvider extends ChangeNotifier {
 
   // initialize variable
   String _locationSearchKeyword = '';
-  String _location = '';
+  String _location = 'Cimahi';
 
   MovieListingProvider({required this.repository}) {
     getMovieListing = GetMovieListing(repository: repository);
   }
 
+  // Register function
   Future<String> getMovies() {
     return getMovieListing.execute();
+  }
+
+  void updateLocationSearchKeyword(String value) async {
+    _locationSearchKeyword = value;
+    notifyListeners();
   }
 
   void resetLocationSearchKeyword() async {
