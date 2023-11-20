@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 
+enum Variant { primary, sencondary }
+
 class CustomAppBar extends StatefulWidget {
-  const CustomAppBar({super.key});
+  const CustomAppBar({
+    super.key,
+    this.variant = Variant.primary,
+  });
+
+  final Variant variant;
 
   @override
   State<CustomAppBar> createState() => _CustomAppBarState();
@@ -10,10 +17,11 @@ class CustomAppBar extends StatefulWidget {
 class _CustomAppBarState extends State<CustomAppBar> {
   @override
   Widget build(BuildContext context) {
+    final variant = widget.variant;
     return Container(
       padding: const EdgeInsets.only(left: 15, right: 15, top: 40, bottom: 25),
       width: double.infinity,
-      color: Colors.red,
+      color: variant == Variant.sencondary ? Colors.white : Colors.red,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -26,6 +34,10 @@ class _CustomAppBarState extends State<CustomAppBar> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
                   color: Colors.white,
+                  border: Border.all(
+                    width: 1,
+                    color: Colors.grey.shade300,
+                  ),
                 ),
                 margin: const EdgeInsets.only(right: 10),
                 padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -60,13 +72,17 @@ class _CustomAppBarState extends State<CustomAppBar> {
                   color: Colors.transparent,
                   border: Border.all(
                     width: 2,
-                    color: Colors.white,
+                    color: variant == Variant.sencondary
+                        ? Colors.pink
+                        : Colors.white,
                   ),
                 ),
-                child: const Icon(
+                child: Icon(
                   Icons.person_2_outlined,
-                  color: Colors.white,
                   size: 20,
+                  color: variant == Variant.sencondary
+                      ? Colors.pink
+                      : Colors.white,
                 ),
               ),
             ),
@@ -75,11 +91,13 @@ class _CustomAppBarState extends State<CustomAppBar> {
             padding: const EdgeInsets.only(left: 8),
             child: InkWell(
               onTap: () {},
-              child: const SizedBox(
+              child: SizedBox(
                 width: 25,
                 child: Icon(
                   Icons.email_outlined,
-                  color: Colors.white,
+                  color: variant == Variant.sencondary
+                      ? Colors.pink
+                      : Colors.white,
                   size: 25,
                 ),
               ),
