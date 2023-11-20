@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:movie_moka/src/core/presentation/provider/bottom_menu_provider.dart';
 import 'package:movie_moka/src/core/utils/get_route_location.dart';
 import 'package:movie_moka/src/core/utils/material_color.dart';
-import 'package:movie_moka/src/core/presentation/widget/scaffold.dart';
+import 'package:movie_moka/src/core/presentation/widgets/scaffold.dart';
 import 'package:movie_moka/src/features/foods/presentation/routes/foods.dart';
 import 'package:movie_moka/src/features/menu/presentation/routes/menu.dart';
 import 'package:movie_moka/src/features/movies/data/repository/movie_listing_impl.dart';

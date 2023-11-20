@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:movie_moka/src/core/presentation/provider/bottom_menu_provider.dart';
-import 'package:movie_moka/src/core/presentation/widget/app_bar.dart';
-import 'package:movie_moka/src/core/presentation/widget/bottom_navigation.dart';
-import 'package:movie_moka/src/core/presentation/widget/modal_ticket_options.dart';
+import 'package:movie_moka/src/core/presentation/widgets/app_bar.dart';
+import 'package:movie_moka/src/core/presentation/widgets/bottom_navigation.dart';
+import 'package:movie_moka/src/core/presentation/widgets/modal_ticket_options.dart';
 import 'package:movie_moka/src/features/foods/presentation/routes/foods.dart';
 import 'package:movie_moka/src/features/menu/presentation/routes/menu.dart';
 import 'package:movie_moka/src/features/movies/presentation/routes/movie_listing.dart';

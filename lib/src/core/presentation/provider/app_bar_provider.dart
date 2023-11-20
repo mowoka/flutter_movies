@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movie_moka/src/core/presentation/widget/app_bar.dart';
+import 'package:movie_moka/src/core/presentation/widgets/app_bar.dart';
 
 class AppBarProvider extends ChangeNotifier {
   Variant variant = Variant.primary;
