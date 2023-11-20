@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movie_moka/src/features/movies/presentation/widget/movie_listing_header.dart';
+import 'package:movie_moka/src/features/movies/presentation/widgets/movie_listing_header.dart';
 
 class MovieListingFoodAndDrinks extends StatefulWidget {
   const MovieListingFoodAndDrinks({super.key});

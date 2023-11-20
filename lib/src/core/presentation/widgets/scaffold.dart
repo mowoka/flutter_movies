@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:movie_moka/src/core/presentation/provider/bottom_menu_provider.dart';
-import 'package:movie_moka/src/core/presentation/widget/app_bar.dart';
-import 'package:movie_moka/src/core/presentation/widget/bottom_navigation.dart';
-import 'package:movie_moka/src/core/presentation/widget/modal_ticket_options.dart';
+import 'package:movie_moka/src/core/presentation/widgets/app_bar.dart';
+import 'package:movie_moka/src/core/presentation/widgets/bottom_navigation.dart';
+import 'package:movie_moka/src/core/presentation/widgets/modal_ticket_options.dart';
 import 'package:movie_moka/src/features/foods/presentation/routes/foods.dart';
 import 'package:movie_moka/src/features/menu/presentation/routes/menu.dart';
 import 'package:movie_moka/src/features/movies/presentation/routes/movie_listing.dart';
+import 'package:movie_moka/src/features/my_cgv/presentation/routes/my_cgv.dart';
 import 'package:provider/provider.dart';
 
 class CustomScaffold extends StatefulWidget {
@@ -34,7 +35,7 @@ class _CustomScaffoldState extends State<CustomScaffold> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Consumer<BottomMenuProvier>(builder: (context, notifier, child) {
-              Variant variant = [2].contains(notifier.activeMenuIndex)
+              Variant variant = [2, 3].contains(notifier.activeMenuIndex)
                   ? Variant.sencondary
                   : Variant.primary;
 
@@ -51,7 +52,7 @@ class _CustomScaffoldState extends State<CustomScaffold> {
                     case 2:
                       return const Foods();
                     case 3:
-                      return const MovieListing();
+                      return const MyCgv();
                     case 4:
                       return const MenuRoute();
                     default:

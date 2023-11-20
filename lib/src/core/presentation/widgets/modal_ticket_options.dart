@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movie_moka/src/core/presentation/widget/panel_line_bottom_modal.dart';
+import 'package:movie_moka/src/core/presentation/widgets/panel_line_bottom_modal.dart';
 
 class ModalTicketOptions extends StatefulWidget {
   const ModalTicketOptions({super.key});

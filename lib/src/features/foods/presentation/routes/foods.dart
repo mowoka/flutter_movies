@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:movie_moka/src/features/foods/presentation/widget/foods_carousel.dart';
-import 'package:movie_moka/src/features/foods/presentation/widget/foods_place_list.dart';
+import 'package:movie_moka/src/features/foods/presentation/widgets/foods_carousel.dart';
+import 'package:movie_moka/src/features/foods/presentation/widgets/foods_place_list.dart';
 
 class Foods extends StatefulWidget {
   const Foods({super.key});

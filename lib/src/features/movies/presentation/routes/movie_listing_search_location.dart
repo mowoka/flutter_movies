@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:movie_moka/src/features/movies/presentation/providers/movie_listing_provider.dart';
-import 'package:movie_moka/src/features/movies/presentation/widget/search_location_header.dart';
+import 'package:movie_moka/src/features/movies/presentation/widgets/search_location_header.dart';
 import 'package:provider/provider.dart';
 
 class MovieListingSearchLocation extends StatefulWidget {

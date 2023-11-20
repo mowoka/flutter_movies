@@ -5,13 +5,14 @@ import 'package:intl/intl.dart';
 import 'package:movie_moka/src/core/presentation/provider/bottom_menu_provider.dart';
 import 'package:movie_moka/src/core/utils/get_route_location.dart';
 import 'package:movie_moka/src/core/utils/material_color.dart';
-import 'package:movie_moka/src/core/presentation/widget/scaffold.dart';
+import 'package:movie_moka/src/core/presentation/widgets/scaffold.dart';
 import 'package:movie_moka/src/features/foods/presentation/routes/foods.dart';
 import 'package:movie_moka/src/features/menu/presentation/routes/menu.dart';
 import 'package:movie_moka/src/features/movies/data/repository/movie_listing_impl.dart';
 import 'package:movie_moka/src/features/movies/presentation/providers/movie_listing_provider.dart';
 import 'package:movie_moka/src/features/movies/presentation/routes/movie_listing.dart';
 import 'package:movie_moka/src/features/movies/presentation/routes/movie_listing_search_location.dart';
+import 'package:movie_moka/src/features/my_cgv/presentation/routes/my_cgv.dart';
 import 'package:provider/provider.dart';
 
 /// The Widget that configures your application.
@@ -183,6 +184,14 @@ class _MyAppState extends State<MyApp> {
           builder: (context, state) => CustomScaffold(
             routeName: getLocationRoute(Foods.routeName),
             children: const Foods(),
+          ),
+        ),
+        GoRoute(
+          name: MyCgv.routeName,
+          path: MyCgv.routePath,
+          builder: (context, state) => CustomScaffold(
+            routeName: getLocationRoute(MyCgv.routeName),
+            children: const MyCgv(),
           ),
         ),
       ],

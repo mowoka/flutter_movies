@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:movie_moka/src/core/utils/date_formatter.dart';
-import 'package:movie_moka/src/features/movies/presentation/widget/movie_listing_header.dart';
+import 'package:movie_moka/src/features/movies/presentation/widgets/movie_listing_header.dart';
 
 class MovieListingNowPlaying extends StatefulWidget {
   const MovieListingNowPlaying({super.key});
