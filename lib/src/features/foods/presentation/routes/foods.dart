@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:movie_moka/src/features/foods/presentation/widget/foods_carousel.dart';
+import 'package:movie_moka/src/features/foods/presentation/widget/foods_place_list.dart';
 
 class Foods extends StatefulWidget {
   const Foods({super.key});
@@ -13,8 +15,13 @@ class Foods extends StatefulWidget {
 class _FoodsState extends State<Foods> {
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text('Foods'),
+    return const SingleChildScrollView(
+      child: Column(
+        children: [
+          FoodsCarousel(),
+          FoodsPlaceList(),
+        ],
+      ),
     );
   }
 }
