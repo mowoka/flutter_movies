@@ -3,6 +3,7 @@ import 'package:movie_moka/src/core/presentation/provider/bottom_menu_provider.d
 import 'package:movie_moka/src/core/presentation/widget/app_bar.dart';
 import 'package:movie_moka/src/core/presentation/widget/bottom_navigation.dart';
 import 'package:movie_moka/src/core/presentation/widget/modal_ticket_options.dart';
+import 'package:movie_moka/src/features/foods/presentation/routes/foods.dart';
 import 'package:movie_moka/src/features/menu/presentation/routes/menu.dart';
 import 'package:movie_moka/src/features/movies/presentation/routes/movie_listing.dart';
 import 'package:provider/provider.dart';
@@ -13,7 +14,6 @@ class CustomScaffold extends StatefulWidget {
     required this.children,
     required this.routeName,
   });
-
   final Widget children;
   final String routeName;
 
@@ -33,18 +33,23 @@ class _CustomScaffoldState extends State<CustomScaffold> {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            const CustomAppBar(),
+            Consumer<BottomMenuProvier>(builder: (context, notifier, child) {
+              Variant variant = [2].contains(notifier.activeMenuIndex)
+                  ? Variant.sencondary
+                  : Variant.primary;
+
+              return CustomAppBar(
+                variant: variant,
+              );
+            }),
             Expanded(
               child: Consumer<BottomMenuProvier>(
                 builder: (context, notifier, child) {
                   switch (notifier.activeMenuIndex) {
                     case 0:
                       return const MovieListing();
-                    case 1:
-                      // ticket use modal so this is return anything you wants;
-                      return const MovieListing();
                     case 2:
-                      return const MovieListing();
+                      return const Foods();
                     case 3:
                       return const MovieListing();
                     case 4:
@@ -86,11 +91,11 @@ class _CustomScaffoldState extends State<CustomScaffold> {
                     });
                 return;
               }
-              final provider = Provider.of<BottomMenuProvier>(
+              final bottomProvider = Provider.of<BottomMenuProvier>(
                 context,
                 listen: false,
               );
-              provider.changeBottomMenu(index);
+              bottomProvider.changeBottomMenu(index);
             },
           );
         },

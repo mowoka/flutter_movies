@@ -19,6 +19,7 @@ class MovieListingCarousel extends StatefulWidget {
 }
 
 class _MovieListingCarouselState extends State<MovieListingCarousel> {
+  int currentIndex = 0;
   final List<String> bannerPromo = [
     'https://pinkbike-movie.com/wp-content/uploads/2019/10/Pink_Bike_Movie_Promotional-1.jpg',
     'https://www.mimamuseum.eu/app/assets/uploads/2021/06/MM2105-Banner-facebook-cover-820x312-copie.png',
@@ -27,8 +28,6 @@ class _MovieListingCarouselState extends State<MovieListingCarousel> {
     'https://diskingdom.com/wp-content/uploads/2016/11/see-the-video-of-alessia-caras-version-of-how-far-ill-go-from-moana-moanaevent-820x312.jpg',
     'https://www.stagecoachtc.com/wp-content/uploads/2023/06/School-of-Rock-820x312-1.jpg'
   ];
-
-  int currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {

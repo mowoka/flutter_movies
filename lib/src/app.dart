@@ -6,6 +6,7 @@ import 'package:movie_moka/src/core/presentation/provider/bottom_menu_provider.d
 import 'package:movie_moka/src/core/utils/get_route_location.dart';
 import 'package:movie_moka/src/core/utils/material_color.dart';
 import 'package:movie_moka/src/core/presentation/widget/scaffold.dart';
+import 'package:movie_moka/src/features/foods/presentation/routes/foods.dart';
 import 'package:movie_moka/src/features/menu/presentation/routes/menu.dart';
 import 'package:movie_moka/src/features/movies/data/repository/movie_listing_impl.dart';
 import 'package:movie_moka/src/features/movies/presentation/providers/movie_listing_provider.dart';
@@ -47,8 +48,8 @@ class _MyAppState extends State<MyApp> {
     );
 
     // register provider
-    _movieListingProvider = MovieListingProvider(repository: movieRepo);
     _bottomMenuProvier = BottomMenuProvier();
+    _movieListingProvider = MovieListingProvider(repository: movieRepo);
   }
 
   @override
@@ -65,6 +66,10 @@ class _MyAppState extends State<MyApp> {
       child: MaterialApp.router(
         title: "Flutter App",
         theme: ThemeData(
+          scaffoldBackgroundColor: Colors.white,
+          bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+            backgroundColor: Colors.white,
+          ),
           fontFamily: 'Poppins',
           primarySwatch: createMaterialColor(fluAppLightOrangeColor),
           textTheme: const TextTheme(
@@ -171,7 +176,15 @@ class _MyAppState extends State<MyApp> {
             routeName: getLocationRoute(MenuRoute.routeName),
             children: const MenuRoute(),
           ),
-        )
+        ),
+        GoRoute(
+          name: Foods.routeName,
+          path: Foods.routePath,
+          builder: (context, state) => CustomScaffold(
+            routeName: getLocationRoute(Foods.routeName),
+            children: const Foods(),
+          ),
+        ),
       ],
     );
 
