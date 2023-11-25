@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:movie_moka/src/features/movies/presentation/widgets/movie_listing_header.dart';
+import 'package:movie_moka/src/features/movies/presentation/widgets/movie_home_header.dart';
 
-class MovieListingSpecialFeature extends StatefulWidget {
-  const MovieListingSpecialFeature({super.key});
+class MovieHomeSpecialFeature extends StatefulWidget {
+  const MovieHomeSpecialFeature({super.key});
 
   @override
-  State<MovieListingSpecialFeature> createState() =>
-      _MovieListingSpecialFeatureState();
+  State<MovieHomeSpecialFeature> createState() =>
+      _MovieHomeSpecialFeatureState();
 }
 
-class _MovieListingSpecialFeatureState
-    extends State<MovieListingSpecialFeature> {
+class _MovieHomeSpecialFeatureState extends State<MovieHomeSpecialFeature> {
   List<String> specialFeatures = [
     'https://2.bp.blogspot.com/-Wu8iJa66dm8/XGzDrWFO7CI/AAAAAAAAEwI/2qYF9taSAPoZgD0Bg1z9FZd9Q_ABq8uCgCLcBGAs/s1600/img_20170523_172419_343-resized-500.jpg',
     'https://2.bp.blogspot.com/-Wu8iJa66dm8/XGzDrWFO7CI/AAAAAAAAEwI/2qYF9taSAPoZgD0Bg1z9FZd9Q_ABq8uCgCLcBGAs/s1600/img_20170523_172419_343-resized-500.jpg',
@@ -30,7 +29,7 @@ class _MovieListingSpecialFeatureState
           ),
           child: Column(
             children: [
-              MovieListingHeader(
+              MovieHomeHeader(
                 title: "Moka Special Feature",
                 subTitle: "Exclusive experience only at Moka!",
                 onTap: () {},

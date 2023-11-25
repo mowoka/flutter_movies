@@ -10,6 +10,7 @@ import 'package:movie_moka/src/features/foods/presentation/routes/foods.dart';
 import 'package:movie_moka/src/features/menu/presentation/routes/menu.dart';
 import 'package:movie_moka/src/features/movies/data/repository/movie_listing_impl.dart';
 import 'package:movie_moka/src/features/movies/presentation/providers/movie_listing_provider.dart';
+import 'package:movie_moka/src/features/movies/presentation/routes/movie_home.dart';
 import 'package:movie_moka/src/features/movies/presentation/routes/movie_listing.dart';
 import 'package:movie_moka/src/features/movies/presentation/routes/movie_listing_search_location.dart';
 import 'package:movie_moka/src/features/my_cgv/presentation/routes/my_cgv.dart';
@@ -133,11 +134,11 @@ class _MyAppState extends State<MyApp> {
     final router = GoRouter(
       routes: [
         GoRoute(
-          name: MovieListing.routeName,
-          path: MovieListing.routePath,
+          name: MovieHome.routeName,
+          path: MovieHome.routePath,
           builder: (context, state) => CustomScaffold(
-            routeName: getLocationRoute(MovieListing.routeName),
-            children: const MovieListing(),
+            routeName: getLocationRoute(MovieHome.routeName),
+            children: const MovieHome(),
           ),
           routes: [
             GoRoute(
@@ -165,6 +166,34 @@ class _MyAppState extends State<MyApp> {
                     );
                   },
                   child: const MovieListingSearchLocation(),
+                );
+              },
+            ),
+            GoRoute(
+              name: MovieListing.routeName,
+              path: MovieListing.routePath,
+              pageBuilder: (context, state) {
+                // Implement custom Transition Page
+                return CustomTransitionPage(
+                  transitionDuration: const Duration(
+                    milliseconds: 300,
+                  ), // Adjust duration as needed
+                  key: state.pageKey,
+                  transitionsBuilder:
+                      (context, animation, secondaryAnimation, child) {
+                    const begin = Offset(1.0, 0.0); // Slide in from the right
+                    const end = Offset.zero;
+                    var tween = Tween(begin: begin, end: end)
+                        .chain(CurveTween(curve: Curves.easeInOut));
+
+                    var offsetAnimation = animation.drive(tween);
+
+                    return SlideTransition(
+                      position: offsetAnimation,
+                      child: child,
+                    );
+                  },
+                  child: const MovieListing(),
                 );
               },
             ),

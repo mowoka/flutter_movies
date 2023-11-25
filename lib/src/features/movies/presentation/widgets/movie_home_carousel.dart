@@ -6,8 +6,8 @@ import 'package:movie_moka/src/features/movies/presentation/providers/movie_list
 import 'package:movie_moka/src/features/movies/presentation/routes/movie_listing_search_location.dart';
 import 'package:provider/provider.dart';
 
-class MovieListingCarousel extends StatefulWidget {
-  const MovieListingCarousel({
+class MovieHomeCarousel extends StatefulWidget {
+  const MovieHomeCarousel({
     super.key,
     required this.location,
   });
@@ -15,10 +15,10 @@ class MovieListingCarousel extends StatefulWidget {
   final String location;
 
   @override
-  State<MovieListingCarousel> createState() => _MovieListingCarouselState();
+  State<MovieHomeCarousel> createState() => _MovieHomeCarouselState();
 }
 
-class _MovieListingCarouselState extends State<MovieListingCarousel> {
+class _MovieHomeCarouselState extends State<MovieHomeCarousel> {
   int currentIndex = 0;
   final List<String> bannerPromo = [
     'https://pinkbike-movie.com/wp-content/uploads/2019/10/Pink_Bike_Movie_Promotional-1.jpg',
