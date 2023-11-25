@@ -5,7 +5,7 @@ import 'package:movie_moka/src/core/presentation/widgets/bottom_navigation.dart'
 import 'package:movie_moka/src/core/presentation/widgets/modal_ticket_options.dart';
 import 'package:movie_moka/src/features/foods/presentation/routes/foods.dart';
 import 'package:movie_moka/src/features/menu/presentation/routes/menu.dart';
-import 'package:movie_moka/src/features/movies/presentation/routes/movie_listing.dart';
+import 'package:movie_moka/src/features/movies/presentation/routes/movie_home.dart';
 import 'package:movie_moka/src/features/my_cgv/presentation/routes/my_cgv.dart';
 import 'package:provider/provider.dart';
 
@@ -48,7 +48,7 @@ class _CustomScaffoldState extends State<CustomScaffold> {
                 builder: (context, notifier, child) {
                   switch (notifier.activeMenuIndex) {
                     case 0:
-                      return const MovieListing();
+                      return const MovieHome();
                     case 2:
                       return const Foods();
                     case 3:
@@ -56,7 +56,7 @@ class _CustomScaffoldState extends State<CustomScaffold> {
                     case 4:
                       return const MenuRoute();
                     default:
-                      return const MovieListing();
+                      return const MovieHome();
                   }
                   // return widget.children;
                 },

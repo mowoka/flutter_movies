@@ -7,17 +7,17 @@ import 'package:movie_moka/src/features/movies/presentation/widgets/movie_listin
 import 'package:movie_moka/src/features/movies/presentation/widgets/movie_listing_special_feature.dart';
 import 'package:provider/provider.dart';
 
-class MovieListing extends StatefulWidget {
-  const MovieListing({super.key});
+class MovieHome extends StatefulWidget {
+  const MovieHome({super.key});
 
-  static const routeName = 'movie listing';
+  static const routeName = 'movie home';
   static const routePath = '/';
 
   @override
-  State<MovieListing> createState() => _MovieListingState();
+  State<MovieHome> createState() => _MovieHomeState();
 }
 
-class _MovieListingState extends State<MovieListing> {
+class _MovieHomeState extends State<MovieHome> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
