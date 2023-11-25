@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:go_router/go_router.dart';
 import 'package:movie_moka/src/core/utils/date_formatter.dart';
-import 'package:movie_moka/src/features/movies/presentation/widgets/movie_listing_header.dart';
+import 'package:movie_moka/src/features/movies/presentation/routes/movie_listing.dart';
+import 'package:movie_moka/src/features/movies/presentation/widgets/movie_home_header.dart';
 
-class MovieListingNowPlaying extends StatefulWidget {
-  const MovieListingNowPlaying({super.key});
+class MovieHomeNowPlaying extends StatefulWidget {
+  const MovieHomeNowPlaying({super.key});
 
   @override
-  State<MovieListingNowPlaying> createState() => _MovieListingNowPlayingState();
+  State<MovieHomeNowPlaying> createState() => _MovieHomeNowPlayingState();
 }
 
-class _MovieListingNowPlayingState extends State<MovieListingNowPlaying> {
+class _MovieHomeNowPlayingState extends State<MovieHomeNowPlaying> {
   final List<Movie> movies = [
     Movie(
       title: 'Dilan',
@@ -60,10 +62,12 @@ class _MovieListingNowPlayingState extends State<MovieListingNowPlaying> {
           ),
           child: Column(
             children: [
-              MovieListingHeader(
+              MovieHomeHeader(
                 title: 'Now Playing',
                 subTitle: 'Exciting movies that will entetain you!',
-                onTap: () {},
+                onTap: () {
+                  GoRouter.of(context).pushNamed(MovieListing.routeName);
+                },
               ),
               SizedBox(
                 width: double.infinity,

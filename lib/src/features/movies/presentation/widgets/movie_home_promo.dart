@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:movie_moka/src/features/movies/presentation/widgets/movie_listing_header.dart';
+import 'package:movie_moka/src/features/movies/presentation/widgets/movie_home_header.dart';
 
-class MovieListingPromo extends StatefulWidget {
-  const MovieListingPromo({super.key});
+class MovieHomePromo extends StatefulWidget {
+  const MovieHomePromo({super.key});
 
   @override
-  State<MovieListingPromo> createState() => _MovieListingPromoState();
+  State<MovieHomePromo> createState() => _MovieHomePromoState();
 }
 
-class _MovieListingPromoState extends State<MovieListingPromo> {
+class _MovieHomePromoState extends State<MovieHomePromo> {
   List<String> promoMovies = [
     'https://www.gourmetads.com/wp-content/uploads/2019/02/970x250-starbucks-nitro.jpg',
     'https://www.gourmetads.com/wp-content/uploads/2019/02/970x250-starbucks.jpg',
@@ -27,7 +27,7 @@ class _MovieListingPromoState extends State<MovieListingPromo> {
           ),
           child: Column(
             children: [
-              MovieListingHeader(
+              MovieHomeHeader(
                 title: "What's On",
                 subTitle: "Exclusive offers and highlights!",
                 onTap: () {},

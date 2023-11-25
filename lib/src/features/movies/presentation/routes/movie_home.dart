@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:movie_moka/src/features/movies/presentation/providers/movie_listing_provider.dart';
-import 'package:movie_moka/src/features/movies/presentation/widgets/movie_listing_carousel.dart';
-import 'package:movie_moka/src/features/movies/presentation/widgets/movie_listing_food_drinks.dart';
-import 'package:movie_moka/src/features/movies/presentation/widgets/movie_listing_now_playing.dart';
-import 'package:movie_moka/src/features/movies/presentation/widgets/movie_listing_promo.dart';
-import 'package:movie_moka/src/features/movies/presentation/widgets/movie_listing_special_feature.dart';
+import 'package:movie_moka/src/features/movies/presentation/widgets/movie_home_carousel.dart';
+import 'package:movie_moka/src/features/movies/presentation/widgets/movie_home_food_drinks.dart';
+import 'package:movie_moka/src/features/movies/presentation/widgets/movie_home_now_playing.dart';
+import 'package:movie_moka/src/features/movies/presentation/widgets/movie_home_promo.dart';
+import 'package:movie_moka/src/features/movies/presentation/widgets/movie_home_special_feature.dart';
 import 'package:provider/provider.dart';
 
 class MovieHome extends StatefulWidget {
@@ -27,15 +27,15 @@ class _MovieHomeState extends State<MovieHome> {
         children: [
           Consumer<MovieListingProvider>(
             builder: (context, notifier, child) {
-              return MovieListingCarousel(
+              return MovieHomeCarousel(
                 location: notifier.location,
               );
             },
           ),
-          const MovieListingNowPlaying(),
-          const MovieListingPromo(),
-          const MovieListingFoodAndDrinks(),
-          const MovieListingSpecialFeature(),
+          const MovieHomeNowPlaying(),
+          const MovieHomePromo(),
+          const MovieHomeFoodAndDrinks(),
+          const MovieHomeSpecialFeature(),
         ],
       ),
     );
