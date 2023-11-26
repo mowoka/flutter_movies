@@ -40,7 +40,9 @@ class _MovieListingState extends State<MovieListing> {
                     notifier.changeShowMovieListType(value);
                   },
                 ),
-                const MovieListingContent(),
+                MovieListingContent(
+                  movieListShowType: notifier.movieListShowType,
+                ),
               ],
             ),
           );
