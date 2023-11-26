@@ -11,6 +11,8 @@ typedef OnChangeMovieListingSection = Function(
 
 typedef OnChangeShowSearchMovie = Function(bool value);
 
+typedef OnChangeMovieListShowType = Function(MovieListShowType value);
+
 class MovieListingHeader extends StatefulWidget {
   const MovieListingHeader({
     super.key,
@@ -18,12 +20,16 @@ class MovieListingHeader extends StatefulWidget {
     required this.movieSection,
     required this.isShowSearchMovie,
     required this.onChangeShowSearchMovie,
+    required this.movieListShowType,
+    required this.onChangeMovieListShowType,
   });
 
   final OnChangeMovieListingSection onChangeMovieListingSection;
   final MovieListingSection movieSection;
   final bool isShowSearchMovie;
   final OnChangeShowSearchMovie onChangeShowSearchMovie;
+  final MovieListShowType movieListShowType;
+  final OnChangeMovieListShowType onChangeMovieListShowType;
 
   @override
   State<MovieListingHeader> createState() => _MovieListingHeaderState();
@@ -48,8 +54,12 @@ class _MovieListingHeaderState extends State<MovieListingHeader> {
           ),
           OptionsViewHeader(
             isShowSearchMovie: widget.isShowSearchMovie,
+            movieListShowType: widget.movieListShowType,
             onChangeShowSearchMovie: (value) {
               widget.onChangeShowSearchMovie(value);
+            },
+            onChangeMovieListShowType: (value) {
+              widget.onChangeMovieListShowType(value);
             },
           ),
         ],
@@ -63,15 +73,21 @@ class OptionsViewHeader extends StatelessWidget {
     super.key,
     required this.isShowSearchMovie,
     required this.onChangeShowSearchMovie,
+    required this.movieListShowType,
+    required this.onChangeMovieListShowType,
   });
 
   final bool isShowSearchMovie;
   final OnChangeShowSearchMovie onChangeShowSearchMovie;
+  final MovieListShowType movieListShowType;
+  final OnChangeMovieListShowType onChangeMovieListShowType;
 
   @override
   Widget build(BuildContext context) {
+    final isGridView = movieListShowType == MovieListShowType.grid;
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+      padding: EdgeInsets.symmetric(
+          horizontal: 10, vertical: isShowSearchMovie ? 15 : 10),
       color: Colors.red,
       child: Column(
         children: [
@@ -82,7 +98,7 @@ class OptionsViewHeader extends StatelessWidget {
               },
             ),
           Container(
-            padding: const EdgeInsets.only(top: 6),
+            padding: EdgeInsets.only(top: isShowSearchMovie ? 6 : 0),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -137,21 +153,26 @@ class OptionsViewHeader extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 3),
                   child: Row(children: [
                     InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        onChangeMovieListShowType(MovieListShowType.grid);
+                      },
                       splashColor: Colors.transparent,
                       focusColor: Colors.transparent,
                       highlightColor: Colors.transparent,
-                      child: const Icon(
+                      child: Icon(
                         Icons.grid_view,
-                        color: Colors.white,
+                        color: isGridView ? Colors.white : Colors.grey.shade300,
                       ),
                     ),
                     const SizedBox(width: 5),
                     InkWell(
-                      onTap: () {},
-                      child: const Icon(
+                      onTap: () {
+                        onChangeMovieListShowType(MovieListShowType.list);
+                      },
+                      child: Icon(
                         Icons.view_list,
-                        color: Colors.white,
+                        color:
+                            !isGridView ? Colors.white : Colors.grey.shade300,
                       ),
                     ),
                   ]),

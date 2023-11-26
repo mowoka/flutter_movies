@@ -52,7 +52,7 @@ class _MenuRouteState extends State<MenuRoute> {
       final Uri fallbackUri = Uri.parse(url);
       await launchUrl(fallbackUri, mode: LaunchMode.externalApplication);
     } catch (e) {
-      print('cannot lauch');
+      debugPrint('cannot lauch');
     }
   }
 

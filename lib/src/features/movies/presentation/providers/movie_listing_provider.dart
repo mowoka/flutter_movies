@@ -10,12 +10,14 @@ class MovieListingProvider extends ChangeNotifier {
   String get location => _location;
   MovieListingSection get movieSection => _movieSection;
   bool get isShowSearchMovie => _isShowSearchMovie;
+  MovieListShowType get movieListShowType => _movieListShowType;
 
   // initialize variable
   String _locationSearchKeyword = '';
   String _location = 'Cimahi';
   MovieListingSection _movieSection = MovieListingSection.playing;
   bool _isShowSearchMovie = false;
+  MovieListShowType _movieListShowType = MovieListShowType.grid;
 
   MovieListingProvider({required this.repository}) {
     getMovieListing = GetMovieListing(repository: repository);
@@ -48,6 +50,11 @@ class MovieListingProvider extends ChangeNotifier {
 
   void changeShowSearchMovie(bool value) {
     _isShowSearchMovie = value;
+    notifyListeners();
+  }
+
+  void changeShowMovieListType(MovieListShowType value) {
+    _movieListShowType = value;
     notifyListeners();
   }
 }

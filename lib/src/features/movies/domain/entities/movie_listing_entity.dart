@@ -3,7 +3,6 @@ class MovieListingEntity {
   var subTitle = 'Sub Movie Listing';
 }
 
-enum MovieListingSection {
-  playing,
-  upcoming,
-}
+enum MovieListingSection { playing, upcoming }
+
+enum MovieListShowType { grid, list }
