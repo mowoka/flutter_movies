@@ -9,10 +9,7 @@ import 'package:provider/provider.dart';
 class MovieHomeCarousel extends StatefulWidget {
   const MovieHomeCarousel({
     super.key,
-    required this.location,
   });
-
-  final String location;
 
   @override
   State<MovieHomeCarousel> createState() => _MovieHomeCarouselState();
@@ -72,7 +69,7 @@ class _MovieHomeCarouselState extends State<MovieHomeCarousel> {
                                   Padding(
                                     padding: const EdgeInsets.only(left: 5),
                                     child: Text(
-                                      widget.location,
+                                      notifier.location,
                                       style: const TextStyle(
                                         decoration: TextDecoration.underline,
                                         color: Colors.white,

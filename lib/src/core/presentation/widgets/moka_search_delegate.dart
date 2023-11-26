@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:movie_moka/src/core/utils/debouncer.dart';
 
 typedef OnQuery<T> = Future<List<T>> Function(
