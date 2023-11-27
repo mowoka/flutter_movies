@@ -17,7 +17,7 @@ class MovieListingProvider extends ChangeNotifier {
   String _location = 'Cimahi';
   MovieListingSection _movieSection = MovieListingSection.playing;
   bool _isShowSearchMovie = false;
-  MovieListShowType _movieListShowType = MovieListShowType.list;
+  MovieListShowType _movieListShowType = MovieListShowType.grid;
 
   MovieListingProvider({required this.repository}) {
     getMovieListing = GetMovieListing(repository: repository);

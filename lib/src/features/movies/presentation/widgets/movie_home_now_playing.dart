@@ -160,6 +160,7 @@ class Movie {
     this.ages,
     this.duration,
     this.types,
+    this.totalFavorite,
   });
 
   final String title;
@@ -169,4 +170,5 @@ class Movie {
   String? ages;
   String? duration;
   List<String>? types;
+  int? totalFavorite;
 }

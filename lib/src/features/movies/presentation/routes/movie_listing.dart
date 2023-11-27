@@ -42,6 +42,7 @@ class _MovieListingState extends State<MovieListing> {
                 ),
                 MovieListingContent(
                   movieListShowType: notifier.movieListShowType,
+                  movieListingSection: notifier.movieSection,
                 ),
               ],
             ),
