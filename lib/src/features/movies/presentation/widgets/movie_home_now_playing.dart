@@ -157,10 +157,18 @@ class Movie {
     required this.startDate,
     required this.imageURL,
     required this.rating,
+    this.ages,
+    this.duration,
+    this.types,
+    this.totalFavorite,
   });
 
   final String title;
   final String imageURL;
   final String startDate;
   final double rating;
+  String? ages;
+  String? duration;
+  List<String>? types;
+  int? totalFavorite;
 }
