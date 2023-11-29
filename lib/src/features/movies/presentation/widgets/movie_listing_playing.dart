@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:go_router/go_router.dart';
+import 'package:movie_moka/src/core/presentation/widgets/moka_ink_well.dart';
 import 'package:movie_moka/src/features/movies/domain/entities/movie_listing_entity.dart';
+import 'package:movie_moka/src/features/movies/presentation/routes/movie_detail.dart';
 import 'package:movie_moka/src/features/movies/presentation/widgets/movie_home_now_playing.dart';
 
 class MovieListingPlaying extends StatefulWidget {
@@ -32,9 +35,14 @@ class _MovieListingPlayingState extends State<MovieListingPlaying> {
           crossAxisCount: 2,
           children: <Widget>[
             for (final item in widget.movies)
-              GridMovieItem(
-                movieImageUrl: item.imageURL,
-                title: item.title,
+              MokaInkWell(
+                onTap: () {
+                  GoRouter.of(context).pushNamed(MovieDetail.routeName);
+                },
+                child: GridMovieItem(
+                  movieImageUrl: item.imageURL,
+                  title: item.title,
+                ),
               ),
           ],
         ),
@@ -46,13 +54,18 @@ class _MovieListingPlayingState extends State<MovieListingPlaying> {
         child: ListView.separated(
           itemCount: widget.movies.length,
           itemBuilder: (BuildContext context, int index) {
-            return ListMovieItem(
-              movieImageURL: widget.movies[index].imageURL,
-              title: widget.movies[index].title,
-              rating: widget.movies[index].rating,
-              ages: widget.movies[index].ages,
-              duration: widget.movies[index].duration,
-              types: widget.movies[index].types,
+            return MokaInkWell(
+              onTap: () {
+                GoRouter.of(context).pushNamed(MovieDetail.routeName);
+              },
+              child: ListMovieItem(
+                movieImageURL: widget.movies[index].imageURL,
+                title: widget.movies[index].title,
+                rating: widget.movies[index].rating,
+                ages: widget.movies[index].ages,
+                duration: widget.movies[index].duration,
+                types: widget.movies[index].types,
+              ),
             );
           },
           separatorBuilder: (BuildContext context, int index) =>
