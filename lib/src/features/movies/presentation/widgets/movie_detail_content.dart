@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movie_moka/src/features/movies/presentation/widgets/movie_detail_highlight.dart';
+import 'package:movie_moka/src/features/movies/presentation/widgets/movie_detail_show.dart';
+import 'package:movie_moka/src/features/movies/presentation/widgets/movie_detail_synopsis.dart';
 
 class MovieDetailContent extends StatefulWidget {
   const MovieDetailContent({super.key});
@@ -17,7 +19,11 @@ class _MovieDetailContentState extends State<MovieDetailContent> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           MovieDetailHighlight(),
-          Divider(thickness: 5),
+          Divider(thickness: 3),
+          MovieDetailSynopsis(),
+          Divider(thickness: 3),
+          MovieDetailShow(),
+          Divider(thickness: 3),
         ],
       ),
     );
