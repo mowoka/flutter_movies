@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:go_router/go_router.dart';
+import 'package:movie_moka/src/core/presentation/widgets/moka_ink_well.dart';
 import 'package:movie_moka/src/core/utils/date_formatter.dart';
+import 'package:movie_moka/src/features/movies/presentation/routes/movie_detail.dart';
 import 'package:movie_moka/src/features/movies/presentation/routes/movie_listing.dart';
 import 'package:movie_moka/src/features/movies/presentation/widgets/movie_home_header.dart';
 
@@ -76,64 +78,70 @@ class _MovieHomeNowPlayingState extends State<MovieHomeNowPlaying> {
                   scrollDirection: Axis.horizontal,
                   itemCount: movies.length,
                   itemBuilder: (BuildContext context, int index) {
-                    return Container(
-                      padding: const EdgeInsets.only(left: 5, right: 5),
-                      width: 200,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Container(
-                            height: 266,
-                            decoration: BoxDecoration(
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(15)),
-                              image: DecorationImage(
-                                image: NetworkImage(
-                                  movies[index].imageURL,
+                    return MokaInkWell(
+                      onTap: () {
+                        GoRouter.of(context).pushNamed(MovieDetail.routeName);
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.only(left: 5, right: 5),
+                        width: 200,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Container(
+                              height: 266,
+                              decoration: BoxDecoration(
+                                borderRadius:
+                                    const BorderRadius.all(Radius.circular(15)),
+                                image: DecorationImage(
+                                  image: NetworkImage(
+                                    movies[index].imageURL,
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                          const SizedBox(height: 10),
-                          Text(
-                            movies[index].title,
-                            style: const TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w400,
+                            const SizedBox(height: 10),
+                            Text(
+                              movies[index].title,
+                              style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400,
+                              ),
                             ),
-                          ),
-                          Container(
-                            padding: const EdgeInsets.only(top: 5),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Expanded(
-                                  child: RatingBar.builder(
-                                    initialRating: movies[index].rating,
-                                    itemSize: 15,
-                                    allowHalfRating: true,
-                                    direction: Axis.horizontal,
-                                    itemCount: 5,
-                                    ignoreGestures: true,
-                                    itemPadding: const EdgeInsets.symmetric(
-                                        horizontal: 4.0),
-                                    onRatingUpdate: (rating) {},
-                                    itemBuilder: (context, _) => const Icon(
-                                      Icons.star_rate_rounded,
-                                      color: Colors.amber,
+                            Container(
+                              padding: const EdgeInsets.only(top: 5),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Expanded(
+                                    child: RatingBar.builder(
+                                      initialRating: movies[index].rating,
+                                      itemSize: 15,
+                                      allowHalfRating: true,
+                                      direction: Axis.horizontal,
+                                      itemCount: 5,
+                                      ignoreGestures: true,
+                                      itemPadding: const EdgeInsets.symmetric(
+                                          horizontal: 4.0),
+                                      onRatingUpdate: (rating) {},
+                                      itemBuilder: (context, _) => const Icon(
+                                        Icons.star_rate_rounded,
+                                        color: Colors.amber,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                Text(
-                                  dateFormatter(
-                                      movies[index].startDate, 'dd MMM'),
-                                ),
-                              ],
-                            ),
-                          )
-                        ],
+                                  Text(
+                                    dateFormatter(
+                                        movies[index].startDate, 'dd MMM'),
+                                  ),
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                     );
                   },
