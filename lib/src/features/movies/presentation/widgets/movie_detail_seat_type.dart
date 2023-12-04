@@ -24,7 +24,7 @@ class _MovieDetailSeatTypeState extends State<MovieDetailSeatType> {
         children: [
           const MovieDetailSeatTypeTitle(),
           const SizedBox(height: 10),
-          MovieDetailCiname(
+          MovieDetailCinema(
             movieCinema: movieCinema,
             isAccordionOpen: _isAccordionOpen,
             onChangeAccordion: (value) {

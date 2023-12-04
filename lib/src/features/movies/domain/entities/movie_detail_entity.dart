@@ -18,7 +18,17 @@ class MovieCinema {
           ..startTime = '15:00'
           ..endTime = '17:48'
           ..availableSeat = 132
-          ..totalSeat = 132
+          ..totalSeat = 132,
+        MovieCinemaSchedule()
+          ..startTime = '18:00'
+          ..endTime = '21:48'
+          ..availableSeat = 132
+          ..totalSeat = 132,
+        MovieCinemaSchedule()
+          ..startTime = '21:00'
+          ..endTime = '23:48'
+          ..availableSeat = 132
+          ..totalSeat = 132,
       ],
     MovieCinemaType()
       ..type = 'Gold Class'
