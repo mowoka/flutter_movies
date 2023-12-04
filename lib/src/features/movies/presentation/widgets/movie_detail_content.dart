@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_moka/src/features/movies/presentation/widgets/movie_detail_highlight.dart';
+import 'package:movie_moka/src/features/movies/presentation/widgets/movie_detail_seat_type.dart';
 import 'package:movie_moka/src/features/movies/presentation/widgets/movie_detail_show.dart';
 import 'package:movie_moka/src/features/movies/presentation/widgets/movie_detail_synopsis.dart';
 
@@ -24,6 +25,7 @@ class _MovieDetailContentState extends State<MovieDetailContent> {
           Divider(thickness: 3),
           MovieDetailShow(),
           Divider(thickness: 3),
+          MovieDetailSeatType(),
         ],
       ),
     );
