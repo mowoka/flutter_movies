@@ -5,7 +5,12 @@ import 'package:movie_moka/src/features/movies/presentation/widgets/movie_detail
 import 'package:movie_moka/src/features/movies/presentation/widgets/movie_detail_synopsis.dart';
 
 class MovieDetailContent extends StatefulWidget {
-  const MovieDetailContent({super.key});
+  const MovieDetailContent({
+    super.key,
+    required this.scrollController,
+  });
+
+  final ScrollController scrollController;
 
   @override
   State<MovieDetailContent> createState() => _MovieDetailContentState();
@@ -14,8 +19,9 @@ class MovieDetailContent extends StatefulWidget {
 class _MovieDetailContentState extends State<MovieDetailContent> {
   @override
   Widget build(BuildContext context) {
-    return const SingleChildScrollView(
-      child: Column(
+    return SingleChildScrollView(
+      controller: widget.scrollController,
+      child: const Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

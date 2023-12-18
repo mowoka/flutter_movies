@@ -69,7 +69,7 @@ class _MovieDetailCinemaState extends State<MovieDetailCinema> {
       contentHorizontalPadding: 0,
       contentVerticalPadding: 0,
       content: Container(
-        height: 350,
+        height: movieCinema.cinemaType.length * 140,
         width: double.infinity,
         color: Colors.white,
         child: Column(
