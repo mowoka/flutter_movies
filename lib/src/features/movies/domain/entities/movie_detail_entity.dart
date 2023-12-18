@@ -46,6 +46,38 @@ class MovieCinema {
           ..availableSeat = 40
           ..totalSeat = 40
       ],
+    MovieCinemaType()
+      ..type = 'Gold Class'
+      ..price = 50000
+      ..seatName = 'Gold Class 7'
+      ..movieSchedule = [
+        MovieCinemaSchedule()
+          ..startTime = '14:45'
+          ..endTime = '17:33'
+          ..availableSeat = 40
+          ..totalSeat = 40,
+        MovieCinemaSchedule()
+          ..startTime = '17:50'
+          ..endTime = '20:38'
+          ..availableSeat = 40
+          ..totalSeat = 40
+      ],
+    MovieCinemaType()
+      ..type = 'Gold Class'
+      ..price = 50000
+      ..seatName = 'Gold Class 7'
+      ..movieSchedule = [
+        MovieCinemaSchedule()
+          ..startTime = '14:45'
+          ..endTime = '17:33'
+          ..availableSeat = 40
+          ..totalSeat = 40,
+        MovieCinemaSchedule()
+          ..startTime = '17:50'
+          ..endTime = '20:38'
+          ..availableSeat = 40
+          ..totalSeat = 40
+      ],
   ];
 }
 
