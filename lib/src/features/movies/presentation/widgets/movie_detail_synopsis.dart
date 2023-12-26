@@ -44,6 +44,9 @@ class _MovieDetailSynopsisState extends State<MovieDetailSynopsis> {
             : Style(
                 color: Colors.grey.shade600,
               ),
+        "span": Style(
+          color: Colors.grey.shade600,
+        ),
         "li": Style(
           color: Colors.grey.shade600,
           fontWeight: FontWeight.w600,
