@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:movie_moka/src/core/presentation/widgets/moka_ink_well.dart';
 import 'package:movie_moka/src/core/presentation/widgets/moka_text_field.dart';
+import 'package:movie_moka/src/features/auth/presentation/routes/login_with_email.dart';
+import 'package:movie_moka/src/features/auth/presentation/routes/register.dart';
 
 class LoginContent extends StatefulWidget {
   const LoginContent({super.key});
@@ -209,7 +212,11 @@ class _LoginContentState extends State<LoginContent> {
                     padding: const EdgeInsets.symmetric(horizontal: 20),
                     width: double.infinity,
                     child: MokaInkWell(
-                      onTap: () {},
+                      onTap: () {
+                        GoRouter.of(context).pushNamed(
+                          LoginWithEmail.routeName,
+                        );
+                      },
                       child: Container(
                         padding: const EdgeInsets.only(
                           left: 15,
@@ -266,7 +273,11 @@ class _LoginContentState extends State<LoginContent> {
                           ),
                           const SizedBox(width: 4),
                           MokaInkWell(
-                            onTap: () {},
+                            onTap: () {
+                              GoRouter.of(context).pushNamed(
+                                Register.routeName,
+                              );
+                            },
                             child: const Text(
                               'REGISTER NOW!',
                               style: TextStyle(
