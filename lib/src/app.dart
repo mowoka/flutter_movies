@@ -7,6 +7,7 @@ import 'package:movie_moka/src/core/utils/get_route_location.dart';
 import 'package:movie_moka/src/core/utils/material_color.dart';
 import 'package:movie_moka/src/core/presentation/widgets/scaffold.dart';
 import 'package:movie_moka/src/features/auth/presentation/routes/login.dart';
+import 'package:movie_moka/src/features/auth/presentation/routes/login_with_email.dart';
 import 'package:movie_moka/src/features/foods/presentation/routes/foods.dart';
 import 'package:movie_moka/src/features/menu/presentation/routes/menu.dart';
 import 'package:movie_moka/src/features/movies/data/repository/movie_listing_impl.dart';
@@ -280,6 +281,36 @@ class _MyAppState extends State<MyApp> {
               child: const Login(),
             );
           },
+          routes: [
+            GoRoute(
+              name: LoginWithEmail.routeName,
+              path: LoginWithEmail.routePath,
+              pageBuilder: (context, state) {
+                // Implement custom Transition Page
+                return CustomTransitionPage(
+                  transitionDuration: const Duration(
+                    milliseconds: 300,
+                  ), // Adjust duration as needed
+                  key: state.pageKey,
+                  transitionsBuilder:
+                      (context, animation, secondaryAnimation, child) {
+                    const begin = Offset(1.0, 0.0); // Slide in from the right
+                    const end = Offset.zero;
+                    var tween = Tween(begin: begin, end: end)
+                        .chain(CurveTween(curve: Curves.easeInOut));
+
+                    var offsetAnimation = animation.drive(tween);
+
+                    return SlideTransition(
+                      position: offsetAnimation,
+                      child: child,
+                    );
+                  },
+                  child: const LoginWithEmail(),
+                );
+              },
+            ),
+          ],
         ),
       ],
     );
