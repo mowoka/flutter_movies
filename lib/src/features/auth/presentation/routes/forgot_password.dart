@@ -2,19 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:movie_moka/src/core/presentation/widgets/moka_ink_well.dart';
 import 'package:movie_moka/src/core/presentation/widgets/moka_text_field.dart';
-import 'package:movie_moka/src/features/auth/presentation/routes/forgot_password.dart';
 
-class LoginWithEmail extends StatefulWidget {
-  const LoginWithEmail({super.key});
+class ForgotPassword extends StatefulWidget {
+  const ForgotPassword({super.key});
 
-  static const routeName = 'login with email';
-  static const routePath = 'login-with-email';
+  static const routeName = 'forgot password';
+  static const routePath = '/forgot-password';
 
   @override
-  State<LoginWithEmail> createState() => _LoginWithEmailState();
+  State<ForgotPassword> createState() => _ForgotPasswordState();
 }
 
-class _LoginWithEmailState extends State<LoginWithEmail> {
+class _ForgotPasswordState extends State<ForgotPassword> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,7 +48,7 @@ class _LoginWithEmailState extends State<LoginWithEmail> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             const Text(
-                              'Login with E-mail',
+                              'Reset Password',
                               style: TextStyle(
                                 fontSize: 21,
                                 fontWeight: FontWeight.w600,
@@ -57,7 +56,7 @@ class _LoginWithEmailState extends State<LoginWithEmail> {
                             ),
                             const SizedBox(height: 5),
                             Text(
-                              'Pelase enter your email and password to log into your account',
+                              'Password recovery link will be sent to your e-email',
                               style: TextStyle(
                                 fontSize: 14,
                                 color: Colors.grey.shade500,
@@ -72,42 +71,10 @@ class _LoginWithEmailState extends State<LoginWithEmail> {
                         child: MokaTextField(
                           label: 'E-mail',
                           value: '',
-                          hintText: 'ex: johndoe@gmail.com',
+                          hintText: 'Please input your e-mail address',
                           onChangeTextForm: (value) {},
                         ),
                       ),
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 6, vertical: 6),
-                        child: MokaTextField(
-                          label: 'Password',
-                          value: '',
-                          hintText: 'Please input your password',
-                          onChangeTextForm: (value) {},
-                          type: Type.password,
-                        ),
-                      ),
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: MokaInkWell(
-                          onTap: () {
-                            GoRouter.of(context).pushNamed(
-                              ForgotPassword.routeName,
-                            );
-                          },
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 6, vertical: 6),
-                            child: const Text(
-                              'FORGOT PASSWORD?',
-                              style: TextStyle(
-                                color: Colors.red,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          ),
-                        ),
-                      )
                     ],
                   ),
                 ),
@@ -120,7 +87,7 @@ class _LoginWithEmailState extends State<LoginWithEmail> {
                   ),
                   child: const Center(
                     child: Text(
-                      'CONTINUE',
+                      'RESET PASSWORD',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 14,
