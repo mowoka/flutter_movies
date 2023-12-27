@@ -31,12 +31,17 @@ class _LoginWithEmailState extends State<LoginWithEmail> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Container(
-                        padding: const EdgeInsets.symmetric(vertical: 10),
-                        child: const Icon(
-                          Icons.arrow_back,
-                          color: Colors.black,
-                          size: 30,
+                      MokaInkWell(
+                        onTap: () {
+                          GoRouter.of(context).pop();
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          child: const Icon(
+                            Icons.arrow_back,
+                            color: Colors.black,
+                            size: 30,
+                          ),
                         ),
                       ),
                       Container(

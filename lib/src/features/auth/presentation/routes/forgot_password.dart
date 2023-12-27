@@ -30,12 +30,17 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Container(
-                        padding: const EdgeInsets.symmetric(vertical: 10),
-                        child: const Icon(
-                          Icons.arrow_back,
-                          color: Colors.black,
-                          size: 30,
+                      MokaInkWell(
+                        onTap: () {
+                          GoRouter.of(context).pop();
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          child: const Icon(
+                            Icons.arrow_back,
+                            color: Colors.black,
+                            size: 30,
+                          ),
                         ),
                       ),
                       Container(
@@ -78,19 +83,22 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                     ],
                   ),
                 ),
-                Container(
-                  width: double.infinity,
-                  height: 50,
-                  decoration: BoxDecoration(
-                    color: Colors.grey.shade700,
-                    borderRadius: BorderRadius.circular(6),
-                  ),
-                  child: const Center(
-                    child: Text(
-                      'RESET PASSWORD',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 14,
+                MokaInkWell(
+                  onTap: () {},
+                  child: Container(
+                    width: double.infinity,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      color: Colors.grey.shade700,
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                    child: const Center(
+                      child: Text(
+                        'RESET PASSWORD',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 14,
+                        ),
                       ),
                     ),
                   ),

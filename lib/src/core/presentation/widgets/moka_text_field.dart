@@ -13,6 +13,7 @@ class MokaTextField extends StatefulWidget {
     required this.hintText,
     required this.onChangeTextForm,
     this.type = Type.text,
+    this.isMandatory = false,
   });
 
   final String label;
@@ -20,6 +21,7 @@ class MokaTextField extends StatefulWidget {
   final String hintText;
   final OnChangeTextForm onChangeTextForm;
   final Type type;
+  final bool isMandatory;
 
   @override
   State<MokaTextField> createState() => _MokaTextFieldState();
@@ -38,16 +40,26 @@ class _MokaTextFieldState extends State<MokaTextField> {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Text(
-            widget.label,
-            style: TextStyle(
-              color: Colors.grey.shade600,
-              fontWeight: FontWeight.w500,
-            ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Text(
+                widget.label,
+                style: TextStyle(
+                  color: Colors.grey.shade600,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              if (widget.isMandatory)
+                const Text(
+                  '*',
+                  style: TextStyle(color: Colors.red),
+                ),
+            ],
           ),
           Container(
             margin: const EdgeInsets.only(top: 10),
-            // width: double.infinity,
             height: 40,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(4),
