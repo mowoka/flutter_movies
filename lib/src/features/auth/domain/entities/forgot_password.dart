@@ -1,0 +1,3 @@
+class ForgotPasswordEntity {
+  var email = '';
+}

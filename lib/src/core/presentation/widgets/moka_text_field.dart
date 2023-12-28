@@ -14,6 +14,8 @@ class MokaTextField extends StatefulWidget {
     required this.onChangeTextForm,
     this.type = Type.text,
     this.isMandatory = false,
+    this.maxLength = 60,
+    this.validator,
   });
 
   final String label;
@@ -22,6 +24,8 @@ class MokaTextField extends StatefulWidget {
   final OnChangeTextForm onChangeTextForm;
   final Type type;
   final bool isMandatory;
+  final int maxLength;
+  final String? Function(String value)? validator;
 
   @override
   State<MokaTextField> createState() => _MokaTextFieldState();
@@ -33,6 +37,8 @@ class _MokaTextFieldState extends State<MokaTextField> {
   @override
   Widget build(BuildContext context) {
     final isTextTypePassword = widget.type == Type.password;
+    final validator =
+        widget.validator != null ? widget.validator!(widget.value) : '';
 
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 10),
@@ -71,7 +77,7 @@ class _MokaTextFieldState extends State<MokaTextField> {
             child: Row(
               children: [
                 Expanded(
-                  child: TextField(
+                  child: TextFormField(
                     obscureText: isTextTypePassword && !isSeeTextPassword,
                     decoration: InputDecoration(
                       border: InputBorder.none,
@@ -84,6 +90,10 @@ class _MokaTextFieldState extends State<MokaTextField> {
                         color: Colors.grey.shade400,
                       ),
                     ),
+                    initialValue: widget.value,
+                    onChanged: (value) {
+                      widget.onChangeTextForm(value);
+                    },
                   ),
                 ),
                 if (isTextTypePassword)
@@ -105,6 +115,16 @@ class _MokaTextFieldState extends State<MokaTextField> {
               ],
             ),
           ),
+          if (validator != null && validator.isNotEmpty)
+            Padding(
+              padding: const EdgeInsets.only(top: 8),
+              child: Text(
+                validator,
+                style: const TextStyle(
+                  color: Colors.red,
+                ),
+              ),
+            )
         ],
       ),
     );
