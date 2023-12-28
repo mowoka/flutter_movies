@@ -6,6 +6,7 @@ import 'package:movie_moka/src/core/presentation/provider/bottom_menu_provider.d
 import 'package:movie_moka/src/core/utils/get_route_location.dart';
 import 'package:movie_moka/src/core/utils/material_color.dart';
 import 'package:movie_moka/src/core/presentation/widgets/scaffold.dart';
+import 'package:movie_moka/src/core/utils/moka_page_transition.dart';
 import 'package:movie_moka/src/features/auth/presentation/routes/forgot_password.dart';
 import 'package:movie_moka/src/features/auth/presentation/routes/login.dart';
 import 'package:movie_moka/src/features/auth/presentation/routes/login_with_email.dart';
@@ -143,26 +144,8 @@ class _MyAppState extends State<MyApp> {
           name: Maintenance.routeName,
           path: Maintenance.routePath,
           pageBuilder: (context, state) {
-            // Implement custom Transition Page
-            return CustomTransitionPage(
-              transitionDuration: const Duration(
-                milliseconds: 300,
-              ), // Adjust duration as needed
-              key: state.pageKey,
-              transitionsBuilder:
-                  (context, animation, secondaryAnimation, child) {
-                const begin = Offset(1.0, 0.0); // Slide in from the right
-                const end = Offset.zero;
-                var tween = Tween(begin: begin, end: end)
-                    .chain(CurveTween(curve: Curves.easeInOut));
-
-                var offsetAnimation = animation.drive(tween);
-
-                return SlideTransition(
-                  position: offsetAnimation,
-                  child: child,
-                );
-              },
+            return customTransitionPage(
+              pageKey: state.pageKey,
               child: const Maintenance(),
             );
           },
@@ -179,26 +162,8 @@ class _MyAppState extends State<MyApp> {
               name: MovieListingSearchLocation.routeName,
               path: MovieListingSearchLocation.routePath,
               pageBuilder: (context, state) {
-                // Implement custom Transition Page
-                return CustomTransitionPage(
-                  transitionDuration: const Duration(
-                    milliseconds: 300,
-                  ), // Adjust duration as needed
-                  key: state.pageKey,
-                  transitionsBuilder:
-                      (context, animation, secondaryAnimation, child) {
-                    const begin = Offset(1.0, 0.0); // Slide in from the right
-                    const end = Offset.zero;
-                    var tween = Tween(begin: begin, end: end)
-                        .chain(CurveTween(curve: Curves.easeInOut));
-
-                    var offsetAnimation = animation.drive(tween);
-
-                    return SlideTransition(
-                      position: offsetAnimation,
-                      child: child,
-                    );
-                  },
+                return customTransitionPage(
+                  pageKey: state.pageKey,
                   child: const MovieListingSearchLocation(),
                 );
               },
@@ -207,26 +172,8 @@ class _MyAppState extends State<MyApp> {
               name: MovieListing.routeName,
               path: MovieListing.routePath,
               pageBuilder: (context, state) {
-                // Implement custom Transition Page
-                return CustomTransitionPage(
-                  transitionDuration: const Duration(
-                    milliseconds: 300,
-                  ), // Adjust duration as needed
-                  key: state.pageKey,
-                  transitionsBuilder:
-                      (context, animation, secondaryAnimation, child) {
-                    const begin = Offset(1.0, 0.0); // Slide in from the right
-                    const end = Offset.zero;
-                    var tween = Tween(begin: begin, end: end)
-                        .chain(CurveTween(curve: Curves.easeInOut));
-
-                    var offsetAnimation = animation.drive(tween);
-
-                    return SlideTransition(
-                      position: offsetAnimation,
-                      child: child,
-                    );
-                  },
+                return customTransitionPage(
+                  pageKey: state.pageKey,
                   child: const MovieListing(),
                 );
               },
@@ -235,26 +182,8 @@ class _MyAppState extends State<MyApp> {
               name: MovieDetail.routeName,
               path: MovieDetail.routePath,
               pageBuilder: (context, state) {
-                // Implement custom Transition Page
-                return CustomTransitionPage(
-                  transitionDuration: const Duration(
-                    milliseconds: 300,
-                  ), // Adjust duration as needed
-                  key: state.pageKey,
-                  transitionsBuilder:
-                      (context, animation, secondaryAnimation, child) {
-                    const begin = Offset(1.0, 0.0); // Slide in from the right
-                    const end = Offset.zero;
-                    var tween = Tween(begin: begin, end: end)
-                        .chain(CurveTween(curve: Curves.easeInOut));
-
-                    var offsetAnimation = animation.drive(tween);
-
-                    return SlideTransition(
-                      position: offsetAnimation,
-                      child: child,
-                    );
-                  },
+                return customTransitionPage(
+                  pageKey: state.pageKey,
                   child: const MovieDetail(),
                 );
               },
@@ -289,26 +218,8 @@ class _MyAppState extends State<MyApp> {
           name: Login.routeName,
           path: Login.routePath,
           pageBuilder: (context, state) {
-            // Implement custom Transition Page
-            return CustomTransitionPage(
-              transitionDuration: const Duration(
-                milliseconds: 300,
-              ), // Adjust duration as needed
-              key: state.pageKey,
-              transitionsBuilder:
-                  (context, animation, secondaryAnimation, child) {
-                const begin = Offset(1.0, 0.0); // Slide in from the right
-                const end = Offset.zero;
-                var tween = Tween(begin: begin, end: end)
-                    .chain(CurveTween(curve: Curves.easeInOut));
-
-                var offsetAnimation = animation.drive(tween);
-
-                return SlideTransition(
-                  position: offsetAnimation,
-                  child: child,
-                );
-              },
+            return customTransitionPage(
+              pageKey: state.pageKey,
               child: const Login(),
             );
           },
@@ -317,26 +228,8 @@ class _MyAppState extends State<MyApp> {
               name: LoginWithEmail.routeName,
               path: LoginWithEmail.routePath,
               pageBuilder: (context, state) {
-                // Implement custom Transition Page
-                return CustomTransitionPage(
-                  transitionDuration: const Duration(
-                    milliseconds: 300,
-                  ), // Adjust duration as needed
-                  key: state.pageKey,
-                  transitionsBuilder:
-                      (context, animation, secondaryAnimation, child) {
-                    const begin = Offset(1.0, 0.0); // Slide in from the right
-                    const end = Offset.zero;
-                    var tween = Tween(begin: begin, end: end)
-                        .chain(CurveTween(curve: Curves.easeInOut));
-
-                    var offsetAnimation = animation.drive(tween);
-
-                    return SlideTransition(
-                      position: offsetAnimation,
-                      child: child,
-                    );
-                  },
+                return customTransitionPage(
+                  pageKey: state.pageKey,
                   child: const LoginWithEmail(),
                 );
               },
@@ -347,26 +240,8 @@ class _MyAppState extends State<MyApp> {
           name: ForgotPassword.routeName,
           path: ForgotPassword.routePath,
           pageBuilder: (context, state) {
-            // Implement custom Transition Page
-            return CustomTransitionPage(
-              transitionDuration: const Duration(
-                milliseconds: 300,
-              ), // Adjust duration as needed
-              key: state.pageKey,
-              transitionsBuilder:
-                  (context, animation, secondaryAnimation, child) {
-                const begin = Offset(1.0, 0.0); // Slide in from the right
-                const end = Offset.zero;
-                var tween = Tween(begin: begin, end: end)
-                    .chain(CurveTween(curve: Curves.easeInOut));
-
-                var offsetAnimation = animation.drive(tween);
-
-                return SlideTransition(
-                  position: offsetAnimation,
-                  child: child,
-                );
-              },
+            return customTransitionPage(
+              pageKey: state.pageKey,
               child: const ForgotPassword(),
             );
           },
@@ -375,26 +250,8 @@ class _MyAppState extends State<MyApp> {
           name: Register.routeName,
           path: Register.routePath,
           pageBuilder: (context, state) {
-            // Implement custom Transition Page
-            return CustomTransitionPage(
-              transitionDuration: const Duration(
-                milliseconds: 300,
-              ), // Adjust duration as needed
-              key: state.pageKey,
-              transitionsBuilder:
-                  (context, animation, secondaryAnimation, child) {
-                const begin = Offset(1.0, 0.0); // Slide in from the right
-                const end = Offset.zero;
-                var tween = Tween(begin: begin, end: end)
-                    .chain(CurveTween(curve: Curves.easeInOut));
-
-                var offsetAnimation = animation.drive(tween);
-
-                return SlideTransition(
-                  position: offsetAnimation,
-                  child: child,
-                );
-              },
+            return customTransitionPage(
+              pageKey: state.pageKey,
               child: const Register(),
             );
           },
