@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:movie_moka/src/core/presentation/provider/bottom_menu_provider.dart';
@@ -98,6 +99,7 @@ class _MyAppState extends State<MyApp> {
       ],
       child: MaterialApp.router(
         title: "Flutter App",
+        builder: FToastBuilder(),
         theme: ThemeData(
           scaffoldBackgroundColor: Colors.white,
           bottomNavigationBarTheme: const BottomNavigationBarThemeData(

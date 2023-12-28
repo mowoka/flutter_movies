@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
 import 'package:movie_moka/src/core/presentation/widgets/moka_ink_well.dart';
 import 'package:movie_moka/src/core/presentation/widgets/moka_text_field.dart';
+import 'package:movie_moka/src/core/utils/moka_toast.dart';
 import 'package:movie_moka/src/core/utils/validate.dart';
 import 'package:movie_moka/src/features/auth/domain/entities/login_with_email.dart';
 import 'package:movie_moka/src/features/auth/presentation/providers/login_with_email_provider.dart';
@@ -19,6 +21,15 @@ class LoginWithEmail extends StatefulWidget {
 }
 
 class _LoginWithEmailState extends State<LoginWithEmail> {
+  late FToast fToast;
+
+  @override
+  void initState() {
+    super.initState();
+    fToast = FToast();
+    fToast.init(context);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,6 +44,18 @@ class _LoginWithEmailState extends State<LoginWithEmail> {
               },
               onSubmit: () async {
                 final form = notifier.loginWithEmailForm;
+                final validRes = validateLoginWithEmailForm(form);
+
+                if (validRes != null) {
+                  MokaToast.showToast(
+                    fToast: fToast,
+                    message: validRes,
+                    messageStatus: MessageStatus.error,
+                  );
+
+                  return;
+                }
+
                 await notifier.submitLoginWithEmailForm(form);
               },
             );
@@ -40,6 +63,20 @@ class _LoginWithEmailState extends State<LoginWithEmail> {
         ),
       ),
     );
+  }
+
+  String? validateLoginWithEmailForm(LoginWithEmailEntity form) {
+    if (!validateEmail(form.email)) {
+      return 'Mohon check kembali field email';
+    }
+    if (form.password.isEmpty) {
+      return 'Mohon mengisi field passsword';
+    }
+    if (form.password.length < 6) {
+      return 'Password minimal 6 characther';
+    }
+
+    return null;
   }
 }
 
