@@ -2,10 +2,7 @@ import 'package:movie_moka/src/features/auth/domain/entities/forgot_password.dar
 import 'package:movie_moka/src/features/auth/domain/repositories/forgot_password_repository.dart';
 
 class ForgotPasswordRepositoryImpl implements ForgotPasswordRepository {
-  @override
-  late Future<String> Function() accessTokenGetter;
-
-  ForgotPasswordRepositoryImpl({required this.accessTokenGetter});
+  ForgotPasswordRepositoryImpl();
 
   @override
   Future<String> postForgotPassword({

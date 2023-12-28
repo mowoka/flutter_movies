@@ -39,6 +39,7 @@ class _MokaTextFieldState extends State<MokaTextField> {
     final isTextTypePassword = widget.type == Type.password;
     final validator =
         widget.validator != null ? widget.validator!(widget.value) : '';
+    final showErrorMessage = validator != null && validator.isNotEmpty;
 
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 10),
@@ -71,7 +72,7 @@ class _MokaTextFieldState extends State<MokaTextField> {
               borderRadius: BorderRadius.circular(4),
               border: Border.all(
                 width: 1.0,
-                color: Colors.grey.shade400,
+                color: showErrorMessage ? Colors.red : Colors.grey.shade400,
               ),
             ),
             child: Row(
@@ -115,7 +116,7 @@ class _MokaTextFieldState extends State<MokaTextField> {
               ],
             ),
           ),
-          if (validator != null && validator.isNotEmpty)
+          if (showErrorMessage)
             Padding(
               padding: const EdgeInsets.only(top: 8),
               child: Text(

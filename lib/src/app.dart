@@ -8,7 +8,9 @@ import 'package:movie_moka/src/core/utils/material_color.dart';
 import 'package:movie_moka/src/core/presentation/widgets/scaffold.dart';
 import 'package:movie_moka/src/core/utils/moka_page_transition.dart';
 import 'package:movie_moka/src/features/auth/data/repository/forgot_password_impl.dart';
+import 'package:movie_moka/src/features/auth/data/repository/login_with_email_impl.dart';
 import 'package:movie_moka/src/features/auth/presentation/providers/forgot_password_provider.dart';
+import 'package:movie_moka/src/features/auth/presentation/providers/login_with_email_provider.dart';
 import 'package:movie_moka/src/features/auth/presentation/routes/forgot_password.dart';
 import 'package:movie_moka/src/features/auth/presentation/routes/login.dart';
 import 'package:movie_moka/src/features/auth/presentation/routes/login_with_email.dart';
@@ -39,6 +41,7 @@ class _MyAppState extends State<MyApp> {
   late final GoRouter _router;
   late final BottomMenuProvier _bottomMenuProvier;
   late final ForgotPasswordProvider _forgotPasswordProvider;
+  late final LoginWithEmailProvider _loginWithEmailProvider;
   late final MovieListingProvider _movieListingProvider;
 
   @override
@@ -56,9 +59,8 @@ class _MyAppState extends State<MyApp> {
     _router = initRouter();
     // register repository
     // feat auth
-    final forgoPasswordRepo = ForgotPasswordRepositoryImpl(
-      accessTokenGetter: getAccessToken,
-    );
+    final forgoPasswordRepo = ForgotPasswordRepositoryImpl();
+    final loginWithEmailRepo = LoginWithEmailRepositoryImpl();
     // feat movie
     final movieRepo = MovieListingRepositoryImpl(
       accessTokenGetter: getAccessToken,
@@ -66,11 +68,14 @@ class _MyAppState extends State<MyApp> {
 
     // register provider
     _bottomMenuProvier = BottomMenuProvier();
-    _movieListingProvider = MovieListingProvider(
-      repository: movieRepo,
-    );
     _forgotPasswordProvider = ForgotPasswordProvider(
       repository: forgoPasswordRepo,
+    );
+    _loginWithEmailProvider = LoginWithEmailProvider(
+      repository: loginWithEmailRepo,
+    );
+    _movieListingProvider = MovieListingProvider(
+      repository: movieRepo,
     );
   }
 
@@ -83,6 +88,9 @@ class _MyAppState extends State<MyApp> {
         ),
         ChangeNotifierProvider<ForgotPasswordProvider>(
           create: (context) => _forgotPasswordProvider,
+        ),
+        ChangeNotifierProvider<LoginWithEmailProvider>(
+          create: (context) => _loginWithEmailProvider,
         ),
         ChangeNotifierProvider<MovieListingProvider>(
           create: (context) => _movieListingProvider,
