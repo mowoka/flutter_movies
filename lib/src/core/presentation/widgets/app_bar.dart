@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:movie_moka/src/features/auth/presentation/routes/login.dart';
+import 'package:movie_moka/src/features/maintenance/presentation/routes/maintenance.dart';
 
 enum Variant { primary, sencondary }
 
@@ -94,7 +95,9 @@ class _CustomAppBarState extends State<CustomAppBar> {
           Padding(
             padding: const EdgeInsets.only(left: 8),
             child: InkWell(
-              onTap: () {},
+              onTap: () {
+                GoRouter.of(context).pushNamed(Maintenance.routeName);
+              },
               child: SizedBox(
                 width: 25,
                 child: Icon(
