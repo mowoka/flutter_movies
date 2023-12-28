@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
 import 'package:movie_moka/src/core/presentation/widgets/moka_ink_well.dart';
 import 'package:movie_moka/src/core/presentation/widgets/moka_text_field.dart';
+import 'package:movie_moka/src/core/utils/moka_toast.dart';
 import 'package:movie_moka/src/core/utils/validate.dart';
+import 'package:movie_moka/src/features/auth/domain/entities/forgot_password.dart';
 import 'package:movie_moka/src/features/auth/presentation/providers/forgot_password_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -17,6 +20,15 @@ class ForgotPassword extends StatefulWidget {
 }
 
 class _ForgotPasswordState extends State<ForgotPassword> {
+  late FToast fToast;
+
+  @override
+  void initState() {
+    super.initState();
+    fToast = FToast();
+    fToast.init(context);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,6 +45,18 @@ class _ForgotPasswordState extends State<ForgotPassword> {
               },
               onSubmit: () async {
                 final form = notifier.forgotPasswordForm;
+
+                final validRes = validateForm(form);
+
+                if (validRes != null) {
+                  MokaToast.showToast(
+                    fToast: fToast,
+                    message: validRes,
+                    messageStatus: MessageStatus.error,
+                  );
+                  return;
+                }
+
                 await notifier.submitForgotPassword(form);
               },
             );
@@ -40,6 +64,17 @@ class _ForgotPasswordState extends State<ForgotPassword> {
         ),
       ),
     );
+  }
+
+  String? validateForm(ForgotPasswordEntity form) {
+    if (form.email.isEmpty) {
+      return 'Mohon mengisi field email';
+    }
+
+    if (!validateEmail(form.email)) {
+      return 'Email yang anda input tidak valid';
+    }
+    return null;
   }
 }
 

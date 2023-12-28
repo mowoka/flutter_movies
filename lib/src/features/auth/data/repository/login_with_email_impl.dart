@@ -8,7 +8,6 @@ class LoginWithEmailRepositoryImpl implements LoginWithEmailRepository {
   Future<String> postLoginWithEmail({
     required LoginWithEmailEntity loginForm,
   }) async {
-    final p = loginForm;
     final result = await Future.delayed(const Duration(seconds: 3), () {
       return 'Hello World';
     });
