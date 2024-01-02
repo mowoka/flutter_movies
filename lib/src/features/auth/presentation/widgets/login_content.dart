@@ -128,7 +128,7 @@ class _LoginContentState extends State<LoginContent> {
                                 notifier.loginForm.mobileNumber,
                               );
                               return MokaInkWell(
-                                onTap: () {
+                                onTap: () async {
                                   if (!isValid) {
                                     MokaToast.showToast(
                                       fToast: fToast,
@@ -142,7 +142,7 @@ class _LoginContentState extends State<LoginContent> {
                                     listen: false,
                                   );
                                   final loginForm = provider.loginForm;
-                                  final p = loginForm;
+                                  await provider.submitLogin(loginForm);
                                 },
                                 child: Container(
                                   margin: const EdgeInsets.only(right: 10),
