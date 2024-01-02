@@ -10,8 +10,10 @@ import 'package:movie_moka/src/core/presentation/widgets/scaffold.dart';
 import 'package:movie_moka/src/core/utils/moka_page_transition.dart';
 import 'package:movie_moka/src/features/auth/data/repository/forgot_password_impl.dart';
 import 'package:movie_moka/src/features/auth/data/repository/login_with_email_impl.dart';
+import 'package:movie_moka/src/features/auth/data/repository/register_impl.dart';
 import 'package:movie_moka/src/features/auth/presentation/providers/forgot_password_provider.dart';
 import 'package:movie_moka/src/features/auth/presentation/providers/login_with_email_provider.dart';
+import 'package:movie_moka/src/features/auth/presentation/providers/register_provider.dart';
 import 'package:movie_moka/src/features/auth/presentation/routes/forgot_password.dart';
 import 'package:movie_moka/src/features/auth/presentation/routes/login.dart';
 import 'package:movie_moka/src/features/auth/presentation/routes/login_with_email.dart';
@@ -43,6 +45,7 @@ class _MyAppState extends State<MyApp> {
   late final BottomMenuProvier _bottomMenuProvier;
   late final ForgotPasswordProvider _forgotPasswordProvider;
   late final LoginWithEmailProvider _loginWithEmailProvider;
+  late final RegisterProvider _registerProvider;
   late final MovieListingProvider _movieListingProvider;
 
   @override
@@ -62,6 +65,7 @@ class _MyAppState extends State<MyApp> {
     // feat auth
     final forgoPasswordRepo = ForgotPasswordRepositoryImpl();
     final loginWithEmailRepo = LoginWithEmailRepositoryImpl();
+    final registerRepo = RegisterRepositoryImpl();
     // feat movie
     final movieRepo = MovieListingRepositoryImpl(
       accessTokenGetter: getAccessToken,
@@ -74,6 +78,9 @@ class _MyAppState extends State<MyApp> {
     );
     _loginWithEmailProvider = LoginWithEmailProvider(
       repository: loginWithEmailRepo,
+    );
+    _registerProvider = RegisterProvider(
+      repository: registerRepo,
     );
     _movieListingProvider = MovieListingProvider(
       repository: movieRepo,
@@ -92,6 +99,9 @@ class _MyAppState extends State<MyApp> {
         ),
         ChangeNotifierProvider<LoginWithEmailProvider>(
           create: (context) => _loginWithEmailProvider,
+        ),
+        ChangeNotifierProvider<RegisterProvider>(
+          create: (context) => _registerProvider,
         ),
         ChangeNotifierProvider<MovieListingProvider>(
           create: (context) => _movieListingProvider,
