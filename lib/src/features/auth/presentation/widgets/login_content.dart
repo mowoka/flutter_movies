@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
 import 'package:movie_moka/src/core/presentation/widgets/moka_ink_well.dart';
 import 'package:movie_moka/src/core/presentation/widgets/moka_text_field.dart';
+import 'package:movie_moka/src/core/utils/moka_toast.dart';
+import 'package:movie_moka/src/core/utils/validate.dart';
+import 'package:movie_moka/src/features/auth/presentation/providers/login_provider.dart';
 import 'package:movie_moka/src/features/auth/presentation/routes/login_with_email.dart';
 import 'package:movie_moka/src/features/auth/presentation/routes/register.dart';
+import 'package:provider/provider.dart';
 
 class LoginContent extends StatefulWidget {
   const LoginContent({super.key});
@@ -14,6 +19,16 @@ class LoginContent extends StatefulWidget {
 }
 
 class _LoginContentState extends State<LoginContent> {
+  final mobilePhoneController = TextEditingController();
+  late FToast fToast;
+
+  @override
+  void initState() {
+    super.initState();
+    fToast = FToast();
+    fToast.init(context);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -67,17 +82,39 @@ class _LoginContentState extends State<LoginContent> {
                       ),
                     ),
                   ),
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 20,
-                    ),
-                    width: double.infinity,
-                    child: MokaTextField(
-                      label: 'Mobile Number',
-                      hintText: 'Input your mobile number',
-                      value: '',
-                      onChangeTextForm: (value) {},
-                    ),
+                  Consumer<LoginProvider>(
+                    builder: (context, notifier, child) {
+                      final loginForm = notifier.loginForm;
+                      return Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 20,
+                        ),
+                        width: double.infinity,
+                        child: MokaTextField(
+                          label: 'Mobile Number',
+                          hintText: 'Input your mobile number',
+                          keyboardType: TextInputType.phone,
+                          value: notifier.loginForm.mobileNumber,
+                          textController: mobilePhoneController,
+                          onChangeTextForm: (value) {
+                            if (value.length == 1 && value != '0') {
+                              notifier.loginForm.mobileNumber = '0';
+                              notifier.updateLoginForm(loginForm);
+                            } else {
+                              notifier.loginForm.mobileNumber = value;
+                              notifier.updateLoginForm(loginForm);
+                            }
+                          },
+                          validator: (value) {
+                            if (value.isEmpty) return null;
+                            if (!validateMobilePhone(value)) {
+                              return 'Nomor tidak valid';
+                            }
+                            return null;
+                          },
+                        ),
+                      );
+                    },
                   ),
                   Container(
                     padding:
@@ -85,24 +122,51 @@ class _LoginContentState extends State<LoginContent> {
                     child: Row(
                       children: [
                         Expanded(
-                          child: MokaInkWell(
-                            onTap: () {},
-                            child: Container(
-                              margin: const EdgeInsets.only(right: 10),
-                              height: 40,
-                              decoration: BoxDecoration(
-                                  color: Colors.grey.shade500,
-                                  borderRadius: BorderRadius.circular(4)),
-                              child: Center(
-                                child: Text(
-                                  'CONTINUE',
-                                  style: TextStyle(
-                                    color: Colors.grey.shade400,
-                                    fontWeight: FontWeight.w500,
+                          child: Consumer<LoginProvider>(
+                            builder: (context, notifier, child) {
+                              final isValid = validateMobilePhone(
+                                notifier.loginForm.mobileNumber,
+                              );
+                              return MokaInkWell(
+                                onTap: () async {
+                                  if (!isValid) {
+                                    MokaToast.showToast(
+                                      fToast: fToast,
+                                      message: 'Nomor Telepon Tidak Valid',
+                                      messageStatus: MessageStatus.error,
+                                    );
+                                    return;
+                                  }
+                                  final provider = Provider.of<LoginProvider>(
+                                    context,
+                                    listen: false,
+                                  );
+                                  final loginForm = provider.loginForm;
+                                  await provider.submitLogin(loginForm);
+                                },
+                                child: Container(
+                                  margin: const EdgeInsets.only(right: 10),
+                                  height: 40,
+                                  decoration: BoxDecoration(
+                                    color: isValid
+                                        ? Colors.grey.shade700
+                                        : Colors.grey.shade500,
+                                    borderRadius: BorderRadius.circular(4),
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      'CONTINUE',
+                                      style: TextStyle(
+                                        color: isValid
+                                            ? Colors.white
+                                            : Colors.grey.shade400,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ),
+                              );
+                            },
                           ),
                         ),
                         MokaInkWell(

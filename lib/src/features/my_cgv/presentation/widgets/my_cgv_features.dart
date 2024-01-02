@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:movie_moka/src/features/auth/presentation/routes/login.dart';
 
 class MyCgvFeatures extends StatefulWidget {
   const MyCgvFeatures({super.key});
@@ -42,7 +44,9 @@ class _MyCgvFeaturesState extends State<MyCgvFeatures> {
                     splashColor: Colors.transparent,
                     focusColor: Colors.transparent,
                     highlightColor: Colors.transparent,
-                    onTap: () {},
+                    onTap: () {
+                      GoRouter.of(context).pushNamed(Login.routeName);
+                    },
                     child: SizedBox(
                       width: 65,
                       child: Column(

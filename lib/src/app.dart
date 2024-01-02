@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:movie_moka/src/core/presentation/provider/bottom_menu_provider.dart';
@@ -7,6 +8,14 @@ import 'package:movie_moka/src/core/utils/get_route_location.dart';
 import 'package:movie_moka/src/core/utils/material_color.dart';
 import 'package:movie_moka/src/core/presentation/widgets/scaffold.dart';
 import 'package:movie_moka/src/core/utils/moka_page_transition.dart';
+import 'package:movie_moka/src/features/auth/data/repository/forgot_password_impl.dart';
+import 'package:movie_moka/src/features/auth/data/repository/login.dart';
+import 'package:movie_moka/src/features/auth/data/repository/login_with_email_impl.dart';
+import 'package:movie_moka/src/features/auth/data/repository/register_impl.dart';
+import 'package:movie_moka/src/features/auth/presentation/providers/forgot_password_provider.dart';
+import 'package:movie_moka/src/features/auth/presentation/providers/login_provider.dart';
+import 'package:movie_moka/src/features/auth/presentation/providers/login_with_email_provider.dart';
+import 'package:movie_moka/src/features/auth/presentation/providers/register_provider.dart';
 import 'package:movie_moka/src/features/auth/presentation/routes/forgot_password.dart';
 import 'package:movie_moka/src/features/auth/presentation/routes/login.dart';
 import 'package:movie_moka/src/features/auth/presentation/routes/login_with_email.dart';
@@ -36,6 +45,10 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   late final GoRouter _router;
   late final BottomMenuProvier _bottomMenuProvier;
+  late final LoginProvider _loginProvider;
+  late final ForgotPasswordProvider _forgotPasswordProvider;
+  late final LoginWithEmailProvider _loginWithEmailProvider;
+  late final RegisterProvider _registerProvider;
   late final MovieListingProvider _movieListingProvider;
 
   @override
@@ -52,13 +65,34 @@ class _MyAppState extends State<MyApp> {
   initDependencies() {
     _router = initRouter();
     // register repository
+    // feat auth
+    final loginRepo = LoginRepositoryImpl();
+    final forgoPasswordRepo = ForgotPasswordRepositoryImpl();
+    final loginWithEmailRepo = LoginWithEmailRepositoryImpl();
+    final registerRepo = RegisterRepositoryImpl();
+
+    // feat movie
     final movieRepo = MovieListingRepositoryImpl(
       accessTokenGetter: getAccessToken,
     );
 
     // register provider
     _bottomMenuProvier = BottomMenuProvier();
-    _movieListingProvider = MovieListingProvider(repository: movieRepo);
+    _loginProvider = LoginProvider(
+      repository: loginRepo,
+    );
+    _forgotPasswordProvider = ForgotPasswordProvider(
+      repository: forgoPasswordRepo,
+    );
+    _loginWithEmailProvider = LoginWithEmailProvider(
+      repository: loginWithEmailRepo,
+    );
+    _registerProvider = RegisterProvider(
+      repository: registerRepo,
+    );
+    _movieListingProvider = MovieListingProvider(
+      repository: movieRepo,
+    );
   }
 
   @override
@@ -68,12 +102,25 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider<BottomMenuProvier>(
           create: (context) => _bottomMenuProvier,
         ),
+        ChangeNotifierProvider<LoginProvider>(
+          create: (context) => _loginProvider,
+        ),
+        ChangeNotifierProvider<ForgotPasswordProvider>(
+          create: (context) => _forgotPasswordProvider,
+        ),
+        ChangeNotifierProvider<LoginWithEmailProvider>(
+          create: (context) => _loginWithEmailProvider,
+        ),
+        ChangeNotifierProvider<RegisterProvider>(
+          create: (context) => _registerProvider,
+        ),
         ChangeNotifierProvider<MovieListingProvider>(
           create: (context) => _movieListingProvider,
         ),
       ],
       child: MaterialApp.router(
         title: "Flutter App",
+        builder: FToastBuilder(),
         theme: ThemeData(
           scaffoldBackgroundColor: Colors.white,
           bottomNavigationBarTheme: const BottomNavigationBarThemeData(

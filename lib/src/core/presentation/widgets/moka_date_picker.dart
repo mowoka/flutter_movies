@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:movie_moka/src/core/presentation/widgets/moka_ink_well.dart';
+import 'package:movie_moka/src/core/utils/date_formatter.dart';
 
 class MokaDatePicker extends StatefulWidget {
   const MokaDatePicker({
     super.key,
     required this.label,
+    required this.value,
     required this.hintText,
+    required this.onChange,
     this.isMandatory = false,
   });
 
+  final DateTime value;
   final String label;
   final String hintText;
   final bool isMandatory;
+  final Function(DateTime value) onChange;
 
   @override
   State<MokaDatePicker> createState() => _MokaDatePickerState();
@@ -20,6 +25,7 @@ class MokaDatePicker extends StatefulWidget {
 class _MokaDatePickerState extends State<MokaDatePicker> {
   @override
   Widget build(BuildContext context) {
+    final date = dateFormatter(convertDate(widget.value), 'yMMMMd');
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: Column(
@@ -57,8 +63,7 @@ class _MokaDatePickerState extends State<MokaDatePicker> {
             ),
             child: MokaInkWell(
               onTap: () async {
-                // final selectedDate = await showDatePicker(
-                await showDatePicker(
+                final selectedDate = await showDatePicker(
                     context: context,
                     initialDate: DateTime.now(),
                     firstDate: DateTime(1900),
@@ -73,17 +78,17 @@ class _MokaDatePickerState extends State<MokaDatePicker> {
                           ),
                           textButtonTheme: TextButtonThemeData(
                             style: TextButton.styleFrom(
-                              foregroundColor:
-                                  Colors.white, // button text color
+                              foregroundColor: Colors.red, // button text color
                             ),
                           ),
                         ),
                         child: child!,
                       );
                     });
-
+                if (selectedDate == null) return;
                 // dont forget to conver to ISO
-                // date.toIso8601String()
+                // final date = selectedDate.toIso8601String();
+                widget.onChange(selectedDate);
               },
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -91,13 +96,22 @@ class _MokaDatePickerState extends State<MokaDatePicker> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text(
-                      widget.hintText,
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: Colors.grey.shade600,
+                    if (date.isNotEmpty)
+                      Text(
+                        date,
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: Colors.grey.shade600,
+                        ),
+                      )
+                    else
+                      Text(
+                        widget.hintText,
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: Colors.grey.shade600,
+                        ),
                       ),
-                    ),
                     const Icon(Icons.keyboard_arrow_down)
                   ],
                 ),
