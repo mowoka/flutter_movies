@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:movie_moka/src/core/presentation/widgets/moka_ink_well.dart';
 
 enum Type { text, password }
@@ -12,10 +13,12 @@ class MokaTextField extends StatefulWidget {
     required this.value,
     required this.hintText,
     required this.onChangeTextForm,
+    this.keyboardType = TextInputType.text,
     this.type = Type.text,
     this.isMandatory = false,
     this.maxLength = 60,
     this.validator,
+    this.textController,
   });
 
   final String label;
@@ -25,7 +28,9 @@ class MokaTextField extends StatefulWidget {
   final Type type;
   final bool isMandatory;
   final int maxLength;
+  final TextInputType keyboardType;
   final String? Function(String value)? validator;
+  final TextEditingController? textController;
 
   @override
   State<MokaTextField> createState() => _MokaTextFieldState();
@@ -40,6 +45,28 @@ class _MokaTextFieldState extends State<MokaTextField> {
     final validator =
         widget.validator != null ? widget.validator!(widget.value) : '';
     final showErrorMessage = validator != null && validator.isNotEmpty;
+    final useTextController = widget.textController != null;
+
+    final textInputStyle = InputDecoration(
+      border: InputBorder.none,
+      focusedBorder: InputBorder.none,
+      enabledBorder: InputBorder.none,
+      errorBorder: InputBorder.none,
+      disabledBorder: InputBorder.none,
+      hintText: widget.hintText,
+      hintStyle: TextStyle(
+        color: Colors.grey.shade400,
+      ),
+    );
+
+    // Logic for Schedule sync value with controller and state
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      if (widget.textController != null) {
+        if (widget.textController!.text != widget.value) {
+          widget.textController!.text = widget.value;
+        }
+      }
+    });
 
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 10),
@@ -77,26 +104,30 @@ class _MokaTextFieldState extends State<MokaTextField> {
             ),
             child: Row(
               children: [
-                Expanded(
-                  child: TextFormField(
-                    obscureText: isTextTypePassword && !isSeeTextPassword,
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      focusedBorder: InputBorder.none,
-                      enabledBorder: InputBorder.none,
-                      errorBorder: InputBorder.none,
-                      disabledBorder: InputBorder.none,
-                      hintText: widget.hintText,
-                      hintStyle: TextStyle(
-                        color: Colors.grey.shade400,
-                      ),
+                if (useTextController)
+                  Expanded(
+                    child: TextFormField(
+                      obscureText: isTextTypePassword && !isSeeTextPassword,
+                      controller: widget.textController,
+                      keyboardType: widget.keyboardType,
+                      onChanged: (value) {
+                        widget.onChangeTextForm(value);
+                      },
+                      decoration: textInputStyle,
                     ),
-                    initialValue: widget.value,
-                    onChanged: (value) {
-                      widget.onChangeTextForm(value);
-                    },
+                  )
+                else
+                  Expanded(
+                    child: TextFormField(
+                      obscureText: isTextTypePassword && !isSeeTextPassword,
+                      keyboardType: widget.keyboardType,
+                      initialValue: widget.value,
+                      onChanged: (value) {
+                        widget.onChangeTextForm(value);
+                      },
+                      decoration: textInputStyle,
+                    ),
                   ),
-                ),
                 if (isTextTypePassword)
                   MokaInkWell(
                     onTap: () {
