@@ -2,7 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:movie_moka/src/features/movies/presentation/providers/movie_listing_provider.dart';
+import 'package:movie_moka/src/core/presentation/provider/location_provider.dart';
 import 'package:movie_moka/src/features/movies/presentation/routes/movie_listing_search_location.dart';
 import 'package:provider/provider.dart';
 
@@ -56,7 +56,7 @@ class _MovieHomeCarouselState extends State<MovieHomeCarousel> {
                         color: Colors.white,
                       ),
                       SizedBox(
-                        child: Consumer<MovieListingProvider>(
+                        child: Consumer<LocationProvider>(
                           builder: (context, notifier, child) {
                             return InkWell(
                               onTap: () {

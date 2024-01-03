@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:movie_moka/src/core/presentation/provider/location_provider.dart';
 import 'package:movie_moka/src/features/movies/domain/entities/movie_listing_entity.dart';
-import 'package:movie_moka/src/features/movies/presentation/providers/movie_listing_provider.dart';
 import 'package:movie_moka/src/features/movies/presentation/routes/movie_listing_search_location.dart';
 import 'package:provider/provider.dart';
 
@@ -114,7 +114,7 @@ class OptionsViewHeader extends StatelessWidget {
                         size: 20,
                         color: Colors.white,
                       ),
-                      Consumer<MovieListingProvider>(
+                      Consumer<LocationProvider>(
                         builder: (context, notifier, child) {
                           return SizedBox(
                             child: InkWell(
