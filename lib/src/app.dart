@@ -23,7 +23,9 @@ import 'package:movie_moka/src/features/auth/presentation/routes/register.dart';
 import 'package:movie_moka/src/features/foods/presentation/routes/foods.dart';
 import 'package:movie_moka/src/features/maintenance/presentation/routes/maintenance.dart';
 import 'package:movie_moka/src/features/menu/presentation/routes/menu.dart';
+import 'package:movie_moka/src/features/movies/data/repository/movie_home_impl.dart';
 import 'package:movie_moka/src/features/movies/data/repository/movie_listing_impl.dart';
+import 'package:movie_moka/src/features/movies/presentation/providers/movie_home_provider.dart';
 import 'package:movie_moka/src/features/movies/presentation/providers/movie_listing_provider.dart';
 import 'package:movie_moka/src/features/movies/presentation/routes/movie_detail.dart';
 import 'package:movie_moka/src/features/movies/presentation/routes/movie_home.dart';
@@ -49,6 +51,7 @@ class _MyAppState extends State<MyApp> {
   late final ForgotPasswordProvider _forgotPasswordProvider;
   late final LoginWithEmailProvider _loginWithEmailProvider;
   late final RegisterProvider _registerProvider;
+  late final MovieHomeProvider _movieHomeProvider;
   late final MovieListingProvider _movieListingProvider;
 
   @override
@@ -72,6 +75,7 @@ class _MyAppState extends State<MyApp> {
     final registerRepo = RegisterRepositoryImpl();
 
     // feat movie
+    final movieHomeRepo = MovieHomeRepositoryImpl();
     final movieRepo = MovieListingRepositoryImpl(
       accessTokenGetter: getAccessToken,
     );
@@ -89,6 +93,10 @@ class _MyAppState extends State<MyApp> {
     );
     _registerProvider = RegisterProvider(
       repository: registerRepo,
+    );
+    // movie
+    _movieHomeProvider = MovieHomeProvider(
+      repository: movieHomeRepo,
     );
     _movieListingProvider = MovieListingProvider(
       repository: movieRepo,
@@ -113,6 +121,9 @@ class _MyAppState extends State<MyApp> {
         ),
         ChangeNotifierProvider<RegisterProvider>(
           create: (context) => _registerProvider,
+        ),
+        ChangeNotifierProvider<MovieHomeProvider>(
+          create: (context) => _movieHomeProvider,
         ),
         ChangeNotifierProvider<MovieListingProvider>(
           create: (context) => _movieListingProvider,

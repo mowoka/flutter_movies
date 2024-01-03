@@ -14,7 +14,7 @@ class MovieListingPlaying extends StatefulWidget {
   });
 
   final MovieListShowType movieListShowType;
-  final List<Movie> movies;
+  final List<MovieUI> movies;
 
   @override
   State<MovieListingPlaying> createState() => _MovieListingPlayingState();

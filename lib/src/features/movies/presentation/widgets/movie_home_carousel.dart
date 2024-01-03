@@ -18,12 +18,12 @@ class MovieHomeCarousel extends StatefulWidget {
 class _MovieHomeCarouselState extends State<MovieHomeCarousel> {
   int currentIndex = 0;
   final List<String> bannerPromo = [
-    'https://pinkbike-movie.com/wp-content/uploads/2019/10/Pink_Bike_Movie_Promotional-1.jpg',
-    'https://www.mimamuseum.eu/app/assets/uploads/2021/06/MM2105-Banner-facebook-cover-820x312-copie.png',
-    'https://stageonewi.org/wp-content/uploads/2022/02/Pillowman-820x312-1.jpg',
-    'https://pugetsoundkeeper.org/wp-content/uploads/2023/05/Against-the-Current-Banner-820x312-1.jpg',
-    'https://diskingdom.com/wp-content/uploads/2016/11/see-the-video-of-alessia-caras-version-of-how-far-ill-go-from-moana-moanaevent-820x312.jpg',
-    'https://www.stagecoachtc.com/wp-content/uploads/2023/06/School-of-Rock-820x312-1.jpg'
+    'promo_01.jpeg',
+    'promo_02.png',
+    'promo_03.jpg',
+    'promo_04.jpeg',
+    'promo_05.jpeg',
+    'promo_06.jpeg',
   ];
 
   @override
@@ -116,7 +116,8 @@ class _MovieHomeCarouselState extends State<MovieHomeCarousel> {
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
                                   image: DecorationImage(
-                                    image: NetworkImage(i),
+                                    image: AssetImage('assets/promo/$i'),
+                                    fit: BoxFit.cover,
                                   ),
                                 ),
                               );

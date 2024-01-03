@@ -3,9 +3,13 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:go_router/go_router.dart';
 import 'package:movie_moka/src/core/presentation/widgets/moka_ink_well.dart';
 import 'package:movie_moka/src/core/utils/date_formatter.dart';
+import 'package:movie_moka/src/features/movies/domain/entities/movie_home_entity.dart';
+import 'package:movie_moka/src/features/movies/presentation/providers/movie_home_provider.dart';
 import 'package:movie_moka/src/features/movies/presentation/routes/movie_detail.dart';
 import 'package:movie_moka/src/features/movies/presentation/routes/movie_listing.dart';
 import 'package:movie_moka/src/features/movies/presentation/widgets/movie_home_header.dart';
+import 'package:provider/provider.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class MovieHomeNowPlaying extends StatefulWidget {
   const MovieHomeNowPlaying({super.key});
@@ -15,43 +19,42 @@ class MovieHomeNowPlaying extends StatefulWidget {
 }
 
 class _MovieHomeNowPlayingState extends State<MovieHomeNowPlaying> {
-  final List<Movie> movies = [
-    Movie(
-      title: 'Dilan',
-      rating: 4.5,
-      startDate: '2023-11-20',
-      imageURL:
-          'https://s2.bukalapak.com/img/7057854092/large/poster_film_dilan.jpeg',
-    ),
-    Movie(
-      title: "Matix: Croine a I'incroyable",
-      rating: 3.5,
-      startDate: '2023-11-22',
-      imageURL:
-          'https://www.originalfilmart.com/cdn/shop/products/the_matrix_1999_fr_original_film_art_a.jpg?v=1640646540',
-    ),
-    Movie(
-      title: 'KADET 1947',
-      rating: 4,
-      startDate: '2023-11-21',
-      imageURL:
-          'https://asset.kompas.com/crops/7Ubrj5X59RzzppNgNDS6x6gBRrM=/31x9:872x1131/300x400/data/photo/2021/10/29/617b75cc70698.jpeg',
-    ),
-    Movie(
-      title: 'JOKER',
-      rating: 5,
-      startDate: '2023-11-25',
-      imageURL:
-          'https://asset.kompas.com/crop/39x0:1051x1349/300x400/data/photo/2019/04/03/2579847035.jpg',
-    ),
-    Movie(
-      title: 'Bankit',
-      rating: 4,
-      startDate: '2023-11-15',
-      imageURL:
-          'https://assets.kompasiana.com/items/album/2016/07/30/poster-film-bangkit-cinemags-id-579c5a41d77a6127153c0385.jpg?t=o&v=300',
-    ),
-  ];
+  Future<List<Movie>> _getMovieNowPlaying() async {
+    final provider = Provider.of<MovieHomeProvider>(context, listen: false);
+
+    final res = await provider.getMovieNowPlayingList();
+
+    return res;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder<List<Movie>>(
+      future: _getMovieNowPlaying(),
+      builder: (BuildContext context, AsyncSnapshot<List<Movie>> snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Skeletonizer(
+            enabled: true,
+            child: MovieNowPlayingContent(movies: dummyMovies),
+          );
+        }
+        if (snapshot.data == null) {
+          return Container();
+        }
+
+        return MovieNowPlayingContent(movies: snapshot.data!);
+      },
+    );
+  }
+}
+
+class MovieNowPlayingContent extends StatelessWidget {
+  const MovieNowPlayingContent({
+    super.key,
+    required this.movies,
+  });
+
+  final List<Movie> movies;
 
   @override
   Widget build(BuildContext context) {
@@ -96,7 +99,7 @@ class _MovieHomeNowPlayingState extends State<MovieHomeNowPlaying> {
                                     const BorderRadius.all(Radius.circular(15)),
                                 image: DecorationImage(
                                   image: NetworkImage(
-                                    movies[index].imageURL,
+                                    movies[index].imageUrl,
                                   ),
                                 ),
                               ),
@@ -159,8 +162,23 @@ class _MovieHomeNowPlayingState extends State<MovieHomeNowPlaying> {
   }
 }
 
-class Movie {
-  Movie({
+final List<Movie> dummyMovies = [
+  Movie()
+    ..title = 'Dilan'
+    ..rating = 4.5
+    ..startDate = '2023-11-20'
+    ..imageUrl =
+        'https://www.originalfilmart.com/cdn/shop/products/the_matrix_1999_fr_original_film_art_a.jpg?v=1640646540',
+  Movie()
+    ..title = 'Dilan'
+    ..rating = 4.5
+    ..startDate = '2023-11-20'
+    ..imageUrl =
+        'https://www.originalfilmart.com/cdn/shop/products/the_matrix_1999_fr_original_film_art_a.jpg?v=1640646540',
+];
+
+class MovieUI {
+  MovieUI({
     required this.title,
     required this.startDate,
     required this.imageURL,
