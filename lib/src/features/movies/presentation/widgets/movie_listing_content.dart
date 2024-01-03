@@ -145,11 +145,11 @@ class _MovieListingContentState extends State<MovieListingContent> {
       totalFavorite: 80,
     ),
     MovieUI(
-      title: 'The Mirror',
+      title: 'Tiger 3',
       rating: 4,
       startDate: '2023-12-25',
       imageURL:
-          'https://p19-capcutugimg-sign-va.ibyteimg.com/tos-alisg-v-643f9f/3e38d69b2c8a46ec9161584b8b6cd9ae~tplv-sehyhbs0wv-resize:400:400.jpeg?rk3s=51a218fb&x-expires=1702723518&x-signature=R57huQIqw%2BdodA4yAH2GoSaPBmE%3D',
+          'https://m.media-amazon.com/images/M/MV5BYzQwMGZlYTUtODUwNi00ZjQxLWEzODAtZGU3Zjc0MmNhMzhkXkEyXkFqcGdeQXVyNTkzNDQ4ODc@._V1_.jpg',
       ages: '15+',
       types: ['Action'],
       duration: '120 min',
