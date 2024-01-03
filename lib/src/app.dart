@@ -3,7 +3,9 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
+import 'package:movie_moka/src/core/data/repository/location_impl.dart';
 import 'package:movie_moka/src/core/presentation/provider/bottom_menu_provider.dart';
+import 'package:movie_moka/src/core/presentation/provider/location_provider.dart';
 import 'package:movie_moka/src/core/utils/get_route_location.dart';
 import 'package:movie_moka/src/core/utils/material_color.dart';
 import 'package:movie_moka/src/core/presentation/widgets/scaffold.dart';
@@ -47,6 +49,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   late final GoRouter _router;
   late final BottomMenuProvier _bottomMenuProvier;
+  late final LocationProvider _locationProvider;
   late final LoginProvider _loginProvider;
   late final ForgotPasswordProvider _forgotPasswordProvider;
   late final LoginWithEmailProvider _loginWithEmailProvider;
@@ -68,6 +71,7 @@ class _MyAppState extends State<MyApp> {
   initDependencies() {
     _router = initRouter();
     // register repository
+    final locationRepo = LocationRepositoryImpl();
     // feat auth
     final loginRepo = LoginRepositoryImpl();
     final forgoPasswordRepo = ForgotPasswordRepositoryImpl();
@@ -82,6 +86,9 @@ class _MyAppState extends State<MyApp> {
 
     // register provider
     _bottomMenuProvier = BottomMenuProvier();
+    _locationProvider = LocationProvider(
+      repository: locationRepo,
+    );
     _loginProvider = LoginProvider(
       repository: loginRepo,
     );
@@ -109,6 +116,9 @@ class _MyAppState extends State<MyApp> {
       providers: [
         ChangeNotifierProvider<BottomMenuProvier>(
           create: (context) => _bottomMenuProvier,
+        ),
+        ChangeNotifierProvider<LocationProvider>(
+          create: (context) => _locationProvider,
         ),
         ChangeNotifierProvider<LoginProvider>(
           create: (context) => _loginProvider,

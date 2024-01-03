@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:movie_moka/src/features/movies/presentation/providers/movie_listing_provider.dart';
+import 'package:movie_moka/src/core/presentation/provider/location_provider.dart';
 import 'package:movie_moka/src/features/movies/presentation/widgets/search_location_header.dart';
 import 'package:provider/provider.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class MovieListingSearchLocation extends StatefulWidget {
   const MovieListingSearchLocation({super.key});
@@ -17,31 +18,29 @@ class MovieListingSearchLocation extends StatefulWidget {
 
 class _MovieListingSearchLocationState
     extends State<MovieListingSearchLocation> {
-  List<String> locations = [
-    'Medan',
-    'Padang',
-    'Pekanbaru',
-    'Batam',
-    'Palembang',
-    'Lampung',
-    'Serang',
-    'Tangerang',
-    'Tangerang City',
-    'Tangerang Selatan',
-    'Jakarta',
-    'Depok',
-    'Bogor',
-    'Bekasi',
-    'Cikarang',
-    'Karawang',
-    'Purwakarta',
-    'Bandung',
-    'Cimahi',
-    'Cirebon',
-    'Tegal'
-  ];
+  bool isLoading = false;
+  List<String> locations = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _getLocations();
+  }
+
+  void _getLocations() async {
+    setState(() {
+      isLoading = true;
+    });
+    final provider = Provider.of<LocationProvider>(context, listen: false);
+    final res = await provider.getLocationList();
+    setState(() {
+      locations = res;
+      isLoading = false;
+    });
+  }
 
   List<String> customizeLocations(
+    List<String> locations,
     String currentLocation,
     String searchKeyword,
   ) {
@@ -63,9 +62,10 @@ class _MovieListingSearchLocationState
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
-        child: Consumer<MovieListingProvider>(
+        child: Consumer<LocationProvider>(
           builder: (context, notifier, child) {
             final customLocation = customizeLocations(
+              locations,
               notifier.location,
               notifier.locationSearchKeyword,
             );
@@ -86,65 +86,68 @@ class _MovieListingSearchLocationState
                     child: Padding(
                       padding: const EdgeInsets.only(
                           bottom: 10, left: 10, right: 10),
-                      child: ListView.separated(
-                        itemCount: customLocation.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          final isCurrentLocation =
-                              customLocation[index] == notifier.location;
-                          return InkWell(
-                            onTap: () {
-                              notifier.updateLocation(customLocation[index]);
-                              notifier.resetLocationSearchKeyword();
-                              GoRouter.of(context).pop();
-                            },
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 0, vertical: 5),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Row(
-                                    children: [
-                                      Text(
-                                        customLocation[index],
-                                        style: TextStyle(
-                                          color: isCurrentLocation
-                                              ? Colors.red
-                                              : Colors.black,
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                      ),
-                                      if (isCurrentLocation) ...[
-                                        const SizedBox(width: 5),
-                                        const Icon(
-                                          Icons.circle,
-                                          size: 5,
-                                        ),
-                                        const SizedBox(width: 5),
-                                        const Text(
-                                          "Current Location",
+                      child: Skeletonizer(
+                        enabled: isLoading,
+                        child: ListView.separated(
+                          itemCount: customLocation.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            final isCurrentLocation =
+                                customLocation[index] == notifier.location;
+                            return InkWell(
+                              onTap: () {
+                                notifier.updateLocation(customLocation[index]);
+                                notifier.resetLocationSearchKeyword();
+                                GoRouter.of(context).pop();
+                              },
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 0, vertical: 5),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Text(
+                                          customLocation[index],
                                           style: TextStyle(
+                                            color: isCurrentLocation
+                                                ? Colors.red
+                                                : Colors.black,
                                             fontSize: 14,
                                             fontWeight: FontWeight.w500,
                                           ),
-                                        )
-                                      ]
-                                    ],
-                                  ),
-                                  Icon(
-                                    Icons.arrow_forward_ios_rounded,
-                                    color: Colors.grey.shade500,
-                                  )
-                                ],
+                                        ),
+                                        if (isCurrentLocation) ...[
+                                          const SizedBox(width: 5),
+                                          const Icon(
+                                            Icons.circle,
+                                            size: 5,
+                                          ),
+                                          const SizedBox(width: 5),
+                                          const Text(
+                                            "Current Location",
+                                            style: TextStyle(
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                          )
+                                        ]
+                                      ],
+                                    ),
+                                    Icon(
+                                      Icons.arrow_forward_ios_rounded,
+                                      color: Colors.grey.shade500,
+                                    )
+                                  ],
+                                ),
                               ),
-                            ),
-                          );
-                        },
-                        separatorBuilder: (BuildContext context, int index) =>
-                            const Divider(),
+                            );
+                          },
+                          separatorBuilder: (BuildContext context, int index) =>
+                              const Divider(),
+                        ),
                       ),
                     ),
                   ),
