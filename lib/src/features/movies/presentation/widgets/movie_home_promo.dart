@@ -10,10 +10,10 @@ class MovieHomePromo extends StatefulWidget {
 
 class _MovieHomePromoState extends State<MovieHomePromo> {
   List<String> promoMovies = [
-    'https://www.gourmetads.com/wp-content/uploads/2019/02/970x250-starbucks-nitro.jpg',
-    'https://www.gourmetads.com/wp-content/uploads/2019/02/970x250-starbucks.jpg',
-    'https://www.healthyads.com/wp-content/uploads/2020/04/970x250-billboard.jpg',
-    'https://adspecs.yahooinc.com/_next/image?url=https%3A%2F%2Fs.yimg.com%2Fcv%2Fapiv2%2Fadspecs%2Ffeature%2FdesignRequirementAssets%2F769%2F970x250-static_1659029428813.jpg&w=3840&q=75'
+    'promo_offer_01.jpeg',
+    'promo_offer_02.jpeg',
+    'promo_offer_03.jpeg',
+    'promo_offer_04.webp',
   ];
 
   @override
@@ -38,9 +38,7 @@ class _MovieHomePromoState extends State<MovieHomePromo> {
                   padding: const EdgeInsets.symmetric(vertical: 5),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10),
-                    child: Image.network(
-                      promo,
-                    ),
+                    child: Image.asset('assets/offers/$promo'),
                   ),
                 ),
             ],

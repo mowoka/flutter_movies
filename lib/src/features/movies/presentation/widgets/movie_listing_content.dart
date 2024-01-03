@@ -19,8 +19,8 @@ class MovieListingContent extends StatefulWidget {
 }
 
 class _MovieListingContentState extends State<MovieListingContent> {
-  final List<Movie> movies = [
-    Movie(
+  final List<MovieUI> movies = [
+    MovieUI(
       title: 'Dilan',
       rating: 4.5,
       startDate: '2023-11-20',
@@ -30,7 +30,7 @@ class _MovieListingContentState extends State<MovieListingContent> {
       types: ['Drama', 'Comedy'],
       duration: '120 min',
     ),
-    Movie(
+    MovieUI(
       title: "Matix: Croine a I'incroyable",
       rating: 3.5,
       startDate: '2023-11-22',
@@ -40,7 +40,7 @@ class _MovieListingContentState extends State<MovieListingContent> {
       types: ['Actions'],
       duration: '110 min',
     ),
-    Movie(
+    MovieUI(
       title: 'KADET 1947',
       rating: 4,
       startDate: '2023-11-21',
@@ -50,7 +50,7 @@ class _MovieListingContentState extends State<MovieListingContent> {
       types: ['Actions', 'Comedy'],
       duration: '140 min',
     ),
-    Movie(
+    MovieUI(
       title: 'JOKER',
       rating: 5,
       startDate: '2023-11-25',
@@ -60,7 +60,7 @@ class _MovieListingContentState extends State<MovieListingContent> {
       types: ['Actions', 'Horror'],
       duration: '121 min',
     ),
-    Movie(
+    MovieUI(
       title: 'Bankit',
       rating: 4,
       startDate: '2023-11-15',
@@ -70,7 +70,7 @@ class _MovieListingContentState extends State<MovieListingContent> {
       types: ['Drama'],
       duration: '98 min',
     ),
-    Movie(
+    MovieUI(
       title: 'AKAL',
       rating: 3.5,
       startDate: '2023-12-15',
@@ -80,7 +80,7 @@ class _MovieListingContentState extends State<MovieListingContent> {
       types: ['Actions', 'Horror'],
       duration: '121 min',
     ),
-    Movie(
+    MovieUI(
       title: 'AVATAR',
       rating: 5,
       startDate: '2023-12-15',
@@ -90,7 +90,7 @@ class _MovieListingContentState extends State<MovieListingContent> {
       types: ['Actions'],
       duration: '121 min',
     ),
-    Movie(
+    MovieUI(
       title: 'MAGIC',
       rating: 2,
       startDate: '2023-12-12',
@@ -100,7 +100,7 @@ class _MovieListingContentState extends State<MovieListingContent> {
       types: ['Drama'],
       duration: '121 min',
     ),
-    Movie(
+    MovieUI(
       title: 'KITA NIKAH YUK!',
       rating: 4,
       startDate: '2023-12-17',
@@ -110,7 +110,7 @@ class _MovieListingContentState extends State<MovieListingContent> {
       types: ['Comedy'],
       duration: '121 min',
     ),
-    Movie(
+    MovieUI(
       title: 'RAJAWALI',
       rating: 3,
       startDate: '2023-12-20',
@@ -120,7 +120,7 @@ class _MovieListingContentState extends State<MovieListingContent> {
       types: ['Actions', 'Drama'],
       duration: '121 min',
     ),
-    Movie(
+    MovieUI(
       title: 'KUNGFU PANDA 2',
       rating: 5,
       startDate: '2023-12-21',
@@ -132,8 +132,8 @@ class _MovieListingContentState extends State<MovieListingContent> {
     ),
   ];
 
-  final List<Movie> upcomingMovie = [
-    Movie(
+  final List<MovieUI> upcomingMovie = [
+    MovieUI(
       title: 'Mangkujiwo',
       rating: 4,
       startDate: '2023-12-20',
@@ -144,7 +144,7 @@ class _MovieListingContentState extends State<MovieListingContent> {
       duration: '120 min',
       totalFavorite: 80,
     ),
-    Movie(
+    MovieUI(
       title: 'The Mirror',
       rating: 4,
       startDate: '2023-12-25',
@@ -155,7 +155,7 @@ class _MovieListingContentState extends State<MovieListingContent> {
       duration: '120 min',
       totalFavorite: 20,
     ),
-    Movie(
+    MovieUI(
       title: 'Avatar 3: The Way of Water',
       rating: 5,
       startDate: '2023-12-25',
@@ -166,7 +166,7 @@ class _MovieListingContentState extends State<MovieListingContent> {
       duration: '120 min',
       totalFavorite: 120,
     ),
-    Movie(
+    MovieUI(
       title: 'Anugrah Cinta',
       rating: 3,
       startDate: '2023-12-12',
@@ -177,7 +177,7 @@ class _MovieListingContentState extends State<MovieListingContent> {
       duration: '120 min',
       totalFavorite: 12,
     ),
-    Movie(
+    MovieUI(
       title: 'Le Grand Voyage',
       rating: 2,
       startDate: '2023-12-10',
@@ -190,7 +190,7 @@ class _MovieListingContentState extends State<MovieListingContent> {
       duration: '122 min',
       totalFavorite: 2,
     ),
-    Movie(
+    MovieUI(
       title: 'DOGMAN',
       rating: 4,
       startDate: '2023-12-15',
@@ -202,7 +202,7 @@ class _MovieListingContentState extends State<MovieListingContent> {
       duration: '122 min',
       totalFavorite: 15,
     ),
-    Movie(
+    MovieUI(
       title: 'Teen Beach',
       rating: 4,
       startDate: '2023-12-22',
@@ -213,7 +213,7 @@ class _MovieListingContentState extends State<MovieListingContent> {
       duration: '122 min',
       totalFavorite: 60,
     ),
-    Movie(
+    MovieUI(
       title: 'GATEWAY',
       rating: 4,
       startDate: '2023-12-29',
@@ -224,7 +224,7 @@ class _MovieListingContentState extends State<MovieListingContent> {
       duration: '111 min',
       totalFavorite: 72,
     ),
-    Movie(
+    MovieUI(
       title: 'Lukisan Awan',
       rating: 5,
       startDate: '2023-12-24',
@@ -235,7 +235,7 @@ class _MovieListingContentState extends State<MovieListingContent> {
       duration: '111 min',
       totalFavorite: 120,
     ),
-    Movie(
+    MovieUI(
       title: 'ALI',
       rating: 5,
       startDate: '2023-12-26',
@@ -246,7 +246,7 @@ class _MovieListingContentState extends State<MovieListingContent> {
       duration: '111 min',
       totalFavorite: 90,
     ),
-    Movie(
+    MovieUI(
       title: 'Matilda',
       rating: 4,
       startDate: '2023-12-26',

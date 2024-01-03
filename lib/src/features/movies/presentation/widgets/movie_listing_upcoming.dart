@@ -10,7 +10,7 @@ class MovieListingUpcoming extends StatefulWidget {
   });
 
   final MovieListShowType movieListShowType;
-  final List<Movie> upcomingMovies;
+  final List<MovieUI> upcomingMovies;
 
   @override
   State<MovieListingUpcoming> createState() => _MovieListingUpcomingState();

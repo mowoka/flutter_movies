@@ -9,9 +9,7 @@ class MovieHomeFoodAndDrinks extends StatefulWidget {
 }
 
 class _MovieHomeFoodAndDrinksState extends State<MovieHomeFoodAndDrinks> {
-  List<String> foodPromo = [
-    'https://img.freepik.com/premium-vector/special-discount-food-banner-design_291930-521.jpg'
-  ];
+  List<String> foodPromo = ['promo_food_01.avif'];
 
   @override
   Widget build(BuildContext context) {
@@ -34,9 +32,7 @@ class _MovieHomeFoodAndDrinksState extends State<MovieHomeFoodAndDrinks> {
                   padding: const EdgeInsets.symmetric(vertical: 5),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10),
-                    child: Image.network(
-                      promo,
-                    ),
+                    child: Image.asset('assets/foods/$promo'),
                   ),
                 ),
             ],
