@@ -28,7 +28,7 @@ class MovieListingProvider extends ChangeNotifier {
     return getMovieListing.execute();
   }
 
-  Future<String> getMovieUpcomingList() {
+  Future<List<Movie>> getMovieUpcomingList() {
     return getMovieUpcoming.execute();
   }
 

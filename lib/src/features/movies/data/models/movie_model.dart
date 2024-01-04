@@ -39,7 +39,7 @@ class MovieModel {
       mm.types = (json['types'] as List).map((e) => e.toString()).toList();
     }
     if (json['totalFavorite'] != null) {
-      mm.ages = json['totalFavorite'];
+      mm.totalFavorite = json['totalFavorite'];
     }
 
     return mm;

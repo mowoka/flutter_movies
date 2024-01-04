@@ -5,5 +5,5 @@ abstract class MovieListingRepository {
 
   Future<List<Movie>> getMoviePlaying();
 
-  Future<String> getMovieUpcoming();
+  Future<List<Movie>> getMovieUpcoming();
 }
