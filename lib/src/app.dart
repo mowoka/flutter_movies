@@ -86,7 +86,7 @@ class _MyAppState extends State<MyApp> {
     // feat movie
     final movieHomeRepo = MovieHomeRepositoryImpl();
     final movieRepo = MovieListingRepositoryImpl(
-      accessTokenGetter: getAccessToken,
+      sharedPreferences: widget.sharedPreferences,
     );
 
     // register provider

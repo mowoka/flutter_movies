@@ -1,10 +1,11 @@
 import 'package:movie_moka/src/features/movies/domain/repositories/movie_listing.dart';
 
-class GetMovieListing {
+class GetMovieUpcoming {
   final MovieListingRepository repository;
-  GetMovieListing({required this.repository});
+
+  GetMovieUpcoming({required this.repository});
 
   Future<String> execute() {
-    return repository.getMovieListing();
+    return repository.getMovieUpcoming();
   }
 }

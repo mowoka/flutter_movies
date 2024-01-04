@@ -2,30 +2,48 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:go_router/go_router.dart';
 import 'package:movie_moka/src/core/presentation/widgets/moka_ink_well.dart';
+import 'package:movie_moka/src/features/movies/domain/entities/movie.dart';
 import 'package:movie_moka/src/features/movies/domain/entities/movie_listing_entity.dart';
 import 'package:movie_moka/src/features/movies/presentation/routes/movie_detail.dart';
-import 'package:movie_moka/src/features/movies/presentation/widgets/movie_home_now_playing.dart';
 
 class MovieListingPlaying extends StatefulWidget {
   const MovieListingPlaying({
     super.key,
     required this.movieListShowType,
     required this.movies,
+    this.isLoading = false,
   });
 
   final MovieListShowType movieListShowType;
-  final List<MovieUI> movies;
+  final List<Movie> movies;
+  final bool isLoading;
 
   @override
   State<MovieListingPlaying> createState() => _MovieListingPlayingState();
 }
 
 class _MovieListingPlayingState extends State<MovieListingPlaying> {
+  Widget _renderLoadingWidget({
+    required bool isLoading,
+    required Widget child,
+  }) {
+    if (isLoading) {
+      return SizedBox(
+        height: 650,
+        child: child,
+      );
+    }
+
+    return Expanded(child: child);
+  }
+
   @override
   Widget build(BuildContext context) {
     final isGridView = widget.movieListShowType == MovieListShowType.grid;
+
     if (isGridView) {
-      return Expanded(
+      return _renderLoadingWidget(
+        isLoading: widget.isLoading,
         child: GridView.count(
           primary: true,
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
@@ -40,7 +58,7 @@ class _MovieListingPlayingState extends State<MovieListingPlaying> {
                   GoRouter.of(context).pushNamed(MovieDetail.routeName);
                 },
                 child: GridMovieItem(
-                  movieImageUrl: item.imageURL,
+                  movieImageUrl: item.imageUrl,
                   title: item.title,
                 ),
               ),
@@ -48,7 +66,8 @@ class _MovieListingPlayingState extends State<MovieListingPlaying> {
         ),
       );
     }
-    return Expanded(
+    return _renderLoadingWidget(
+      isLoading: widget.isLoading,
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
         child: ListView.separated(
@@ -59,7 +78,7 @@ class _MovieListingPlayingState extends State<MovieListingPlaying> {
                 GoRouter.of(context).pushNamed(MovieDetail.routeName);
               },
               child: ListMovieItem(
-                movieImageURL: widget.movies[index].imageURL,
+                movieImageURL: widget.movies[index].imageUrl,
                 title: widget.movies[index].title,
                 rating: widget.movies[index].rating,
                 ages: widget.movies[index].ages,

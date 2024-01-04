@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:go_router/go_router.dart';
 import 'package:movie_moka/src/core/presentation/widgets/moka_ink_well.dart';
+import 'package:movie_moka/src/core/utils/data/dummy_data.dart';
 import 'package:movie_moka/src/core/utils/date_formatter.dart';
-import 'package:movie_moka/src/features/movies/domain/entities/movie_home_entity.dart';
+import 'package:movie_moka/src/features/movies/domain/entities/movie.dart';
 import 'package:movie_moka/src/features/movies/presentation/providers/movie_home_provider.dart';
 import 'package:movie_moka/src/features/movies/presentation/routes/movie_detail.dart';
 import 'package:movie_moka/src/features/movies/presentation/routes/movie_listing.dart';
@@ -161,21 +162,6 @@ class MovieNowPlayingContent extends StatelessWidget {
     );
   }
 }
-
-final List<Movie> dummyMovies = [
-  Movie()
-    ..title = 'Dilan'
-    ..rating = 4.5
-    ..startDate = '2023-11-20'
-    ..imageUrl =
-        'https://www.originalfilmart.com/cdn/shop/products/the_matrix_1999_fr_original_film_art_a.jpg?v=1640646540',
-  Movie()
-    ..title = 'Dilan'
-    ..rating = 4.5
-    ..startDate = '2023-11-20'
-    ..imageUrl =
-        'https://www.originalfilmart.com/cdn/shop/products/the_matrix_1999_fr_original_film_art_a.jpg?v=1640646540',
-];
 
 class MovieUI {
   MovieUI({

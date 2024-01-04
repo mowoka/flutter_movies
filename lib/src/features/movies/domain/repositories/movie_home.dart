@@ -1,4 +1,4 @@
-import 'package:movie_moka/src/features/movies/domain/entities/movie_home_entity.dart';
+import 'package:movie_moka/src/features/movies/domain/entities/movie.dart';
 
 abstract class MovieHomeRepository {
   MovieHomeRepository();

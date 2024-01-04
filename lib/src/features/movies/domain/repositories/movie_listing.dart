@@ -1,7 +1,9 @@
+import 'package:movie_moka/src/features/movies/domain/entities/movie.dart';
+
 abstract class MovieListingRepository {
-  late Future<String> Function() accessTokenGetter;
+  MovieListingRepository();
 
-  MovieListingRepository({required this.accessTokenGetter});
+  Future<List<Movie>> getMoviePlaying();
 
-  Future<String> getMovieListing();
+  Future<String> getMovieUpcoming();
 }
