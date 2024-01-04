@@ -1,4 +1,4 @@
-import 'package:movie_moka/src/features/movies/domain/entities/movie_home_entity.dart';
+import 'package:movie_moka/src/features/movies/domain/entities/movie.dart';
 
 class MovieModel {
   MovieModel({
@@ -39,7 +39,7 @@ class MovieModel {
       mm.types = (json['types'] as List).map((e) => e.toString()).toList();
     }
     if (json['totalFavorite'] != null) {
-      mm.ages = json['totalFavorite'];
+      mm.totalFavorite = json['totalFavorite'];
     }
 
     return mm;

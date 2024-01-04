@@ -35,12 +35,15 @@ import 'package:movie_moka/src/features/movies/presentation/routes/movie_listing
 import 'package:movie_moka/src/features/movies/presentation/routes/movie_listing_search_location.dart';
 import 'package:movie_moka/src/features/my_cgv/presentation/routes/my_cgv.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 /// The Widget that configures your application.
 class MyApp extends StatefulWidget {
   const MyApp({
     super.key,
+    required this.sharedPreferences,
   });
+  final SharedPreferences sharedPreferences;
 
   @override
   State<MyApp> createState() => _MyAppState();
@@ -71,7 +74,9 @@ class _MyAppState extends State<MyApp> {
   initDependencies() {
     _router = initRouter();
     // register repository
-    final locationRepo = LocationRepositoryImpl();
+    final locationRepo = LocationRepositoryImpl(
+      sharedPreferences: widget.sharedPreferences,
+    );
     // feat auth
     final loginRepo = LoginRepositoryImpl();
     final forgoPasswordRepo = ForgotPasswordRepositoryImpl();
@@ -81,7 +86,7 @@ class _MyAppState extends State<MyApp> {
     // feat movie
     final movieHomeRepo = MovieHomeRepositoryImpl();
     final movieRepo = MovieListingRepositoryImpl(
-      accessTokenGetter: getAccessToken,
+      sharedPreferences: widget.sharedPreferences,
     );
 
     // register provider

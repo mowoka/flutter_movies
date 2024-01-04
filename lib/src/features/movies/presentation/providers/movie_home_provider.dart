@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:movie_moka/src/features/movies/domain/entities/movie_home_entity.dart';
+import 'package:movie_moka/src/features/movies/domain/entities/movie.dart';
 import 'package:movie_moka/src/features/movies/domain/repositories/movie_home.dart';
 import 'package:movie_moka/src/features/movies/domain/usecases/get_movie_now_playing.dart';
 

@@ -1,5 +1,7 @@
 import 'package:accordion/accordion_section.dart';
 import 'package:flutter/material.dart';
+import 'package:movie_moka/src/core/presentation/provider/location_provider.dart';
+import 'package:provider/provider.dart';
 
 class FoodsPlaceList extends StatefulWidget {
   const FoodsPlaceList({super.key});
@@ -124,44 +126,46 @@ class FoodLocation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.only(left: 20, right: 10, top: 15, bottom: 15),
-      color: Colors.red.shade500,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          InkWell(
-            onTap: () {},
-            child: const Row(
-              children: [
-                Icon(
-                  Icons.location_on,
-                  color: Colors.white,
-                  size: 20,
-                ),
-                SizedBox(width: 5),
-                Text(
-                  'Bandung',
-                  style: TextStyle(
+    return Consumer<LocationProvider>(
+      builder: (context, notifier, child) {
+        return Container(
+          padding:
+              const EdgeInsets.only(left: 20, right: 10, top: 15, bottom: 15),
+          color: Colors.red.shade500,
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  const Icon(
+                    Icons.location_on,
                     color: Colors.white,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
+                    size: 20,
                   ),
+                  const SizedBox(width: 5),
+                  Text(
+                    notifier.location,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ],
+              ),
+              InkWell(
+                onTap: () {},
+                child: const Text(
+                  'CHANGE',
+                  style: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.w500),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-          InkWell(
-            onTap: () {},
-            child: const Text(
-              'CHANGE',
-              style:
-                  TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
-            ),
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 }

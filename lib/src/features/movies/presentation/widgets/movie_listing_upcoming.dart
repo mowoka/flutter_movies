@@ -1,27 +1,44 @@
 import 'package:flutter/material.dart';
+import 'package:movie_moka/src/features/movies/domain/entities/movie.dart';
 import 'package:movie_moka/src/features/movies/domain/entities/movie_listing_entity.dart';
-import 'package:movie_moka/src/features/movies/presentation/widgets/movie_home_now_playing.dart';
 
 class MovieListingUpcoming extends StatefulWidget {
   const MovieListingUpcoming({
     super.key,
     required this.upcomingMovies,
     required this.movieListShowType,
+    this.isLoading = false,
   });
 
   final MovieListShowType movieListShowType;
-  final List<MovieUI> upcomingMovies;
+  final List<Movie> upcomingMovies;
+  final bool isLoading;
 
   @override
   State<MovieListingUpcoming> createState() => _MovieListingUpcomingState();
 }
 
 class _MovieListingUpcomingState extends State<MovieListingUpcoming> {
+  Widget _renderLoadingWidget({
+    required bool isLoading,
+    required Widget child,
+  }) {
+    if (isLoading) {
+      return SizedBox(
+        height: 650,
+        child: child,
+      );
+    }
+
+    return Expanded(child: child);
+  }
+
   @override
   Widget build(BuildContext context) {
     final isGridView = widget.movieListShowType == MovieListShowType.grid;
     if (isGridView) {
-      return Expanded(
+      return _renderLoadingWidget(
+        isLoading: widget.isLoading,
         child: GridView.count(
           primary: true,
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
@@ -32,22 +49,26 @@ class _MovieListingUpcomingState extends State<MovieListingUpcoming> {
           children: <Widget>[
             for (final item in widget.upcomingMovies)
               GridMovieItem(
-                movieImageUrl: item.imageURL,
+                movieImageUrl: item.imageUrl,
                 title: item.title,
                 totalFavorite: item.totalFavorite,
               ),
           ],
         ),
       );
+      // return Expanded(
+      //   child:
+      // );
     }
-    return Expanded(
+    return _renderLoadingWidget(
+      isLoading: widget.isLoading,
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
         child: ListView.separated(
           itemCount: widget.upcomingMovies.length,
           itemBuilder: (BuildContext context, int index) {
             return ListMovieItem(
-              movieImageURL: widget.upcomingMovies[index].imageURL,
+              movieImageURL: widget.upcomingMovies[index].imageUrl,
               title: widget.upcomingMovies[index].title,
               totalFavorite: widget.upcomingMovies[index].totalFavorite,
               ages: widget.upcomingMovies[index].ages,
