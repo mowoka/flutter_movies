@@ -2,6 +2,7 @@ import 'package:movie_moka/src/features/movies/domain/entities/movie.dart';
 
 class MovieModel {
   MovieModel({
+    required this.id,
     required this.title,
     required this.startDate,
     required this.imageURL,
@@ -12,6 +13,7 @@ class MovieModel {
     this.totalFavorite,
   });
 
+  final int id;
   final String title;
   final String imageURL;
   final String startDate;
@@ -23,6 +25,7 @@ class MovieModel {
 
   factory MovieModel.fromJson(dynamic json) {
     MovieModel mm = MovieModel(
+      id: json['id'],
       title: json['title'],
       startDate: json['startDate'],
       imageURL: json['imageURL'],
@@ -47,6 +50,7 @@ class MovieModel {
 
   Movie toEntity() {
     return Movie()
+      ..id = id
       ..title = title
       ..startDate = startDate
       ..imageUrl = imageURL

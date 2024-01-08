@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movie_moka/src/features/movies/domain/entities/movie_detail_entity.dart';
 import 'package:movie_moka/src/features/movies/presentation/widgets/movie_detail_highlight.dart';
 import 'package:movie_moka/src/features/movies/presentation/widgets/movie_detail_seat_type.dart';
 import 'package:movie_moka/src/features/movies/presentation/widgets/movie_detail_show.dart';
@@ -8,9 +9,11 @@ class MovieDetailContent extends StatefulWidget {
   const MovieDetailContent({
     super.key,
     required this.scrollController,
+    required this.movieDetail,
   });
 
   final ScrollController scrollController;
+  final MovieDetailEntity movieDetail;
 
   @override
   State<MovieDetailContent> createState() => _MovieDetailContentState();
