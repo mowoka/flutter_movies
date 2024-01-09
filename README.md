@@ -20,6 +20,20 @@ samples, guidance on mobile development, and a full API reference.
 - or if you using VSCode just using debugger for start development
 
 
+## Build Dev
+
+- **Android**
+    Build the Android `.apk` with development environment
+      ```bash
+      flutter build apk
+      ```
+
+- **IOS**
+    Build the Android `.apk` with development environment
+      ```bash
+     flutter build ipa --export-method=ad-hoc
+      ```
+
 
 ## Assets
 
