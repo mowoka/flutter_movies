@@ -9,7 +9,7 @@ class MovieHomeFoodAndDrinks extends StatefulWidget {
 }
 
 class _MovieHomeFoodAndDrinksState extends State<MovieHomeFoodAndDrinks> {
-  List<String> foodPromo = ['promo_food_01.avif'];
+  List<String> foodPromo = ['promo_food_01.jpeg'];
 
   @override
   Widget build(BuildContext context) {

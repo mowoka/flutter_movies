@@ -29,7 +29,8 @@ class MovieListingRepositoryImpl implements MovieListingRepository {
   Future<List<Movie>> getMoviePlaying() async {
     final isExpired = _spMoviePlaying.isExpired();
     if (!isExpired && _spMoviePlaying.get() != null) {
-      return _spMoviePlaying.get()!;
+      final result = _spMoviePlaying.get()!;
+      return result;
     }
     try {
       final result = await httpGetMoviePlaying();
@@ -37,7 +38,9 @@ class MovieListingRepositoryImpl implements MovieListingRepository {
       _spMoviePlaying.set(entity);
       return entity;
     } catch (e) {
-      return _spMoviePlaying.get() ?? [];
+      // return _spMoviePlaying.get() ?? [];
+      final result = _spMoviePlaying.get() ?? [];
+      return result;
     }
   }
 

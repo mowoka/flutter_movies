@@ -27,6 +27,7 @@ class SharedPrefMoviePlaying extends SharedPrefWithExpiry<List<Movie>> {
     final json = value
         .map(
           (e) => {
+            "id": e.id,
             "title": e.title,
             "rating": e.rating,
             "startDate": e.startDate,

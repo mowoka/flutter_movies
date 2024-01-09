@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:movie_moka/src/features/movies/domain/entities/movie_detail_entity.dart';
 
 class MovieDetailHighlight extends StatefulWidget {
-  const MovieDetailHighlight({super.key});
+  const MovieDetailHighlight({
+    super.key,
+    required this.movieDetail,
+  });
+
+  final MovieDetailEntity movieDetail;
 
   @override
   State<MovieDetailHighlight> createState() => _MovieDetailHighlightState();
@@ -15,10 +21,18 @@ class _MovieDetailHighlightState extends State<MovieDetailHighlight> {
       width: double.infinity,
       child: Stack(
         children: [
-          const MovieHighlightImageCover(),
-          const Positioned(
+          MovieHighlightImageCover(
+            movieImageURL: widget.movieDetail.imageURL,
+          ),
+          Positioned(
             top: 200,
-            child: MovieHighlightTitle(),
+            child: MovieHighlightTitle(
+              movieImageURL: widget.movieDetail.imageURL,
+              title: widget.movieDetail.title,
+              types: widget.movieDetail.types,
+              ages: widget.movieDetail.ages,
+              duration: widget.movieDetail.duration,
+            ),
           ),
           Positioned(
             bottom: 10,
@@ -47,15 +61,17 @@ class _MovieDetailHighlightState extends State<MovieDetailHighlight> {
                       icon: Icons.favorite_border,
                       colorIcon: Colors.grey.shade500,
                       title: 'WATCHLIST',
-                      subPrimaryText: '795+',
+                      subPrimaryText:
+                          widget.movieDetail.totalWatchlist.toString(),
                       subSecondaryText: 'TIMES',
                     ),
                     MovieHightlightInfo(
                       icon: Icons.star_outlined,
                       colorIcon: Colors.amber.shade400,
                       title: 'REVIEW',
-                      subPrimaryText: '5',
-                      subSecondaryText: '104 review',
+                      subPrimaryText: widget.movieDetail.rating.toString(),
+                      subSecondaryText:
+                          '${widget.movieDetail.totalReviewer} review',
                     ),
                   ],
                 ),
@@ -142,10 +158,22 @@ class MovieHightlightInfo extends StatelessWidget {
 class MovieHighlightTitle extends StatelessWidget {
   const MovieHighlightTitle({
     super.key,
+    required this.movieImageURL,
+    required this.title,
+    required this.types,
+    required this.ages,
+    required this.duration,
   });
+
+  final String movieImageURL;
+  final String title;
+  final List<String> types;
+  final String duration;
+  final String ages;
 
   @override
   Widget build(BuildContext context) {
+    final movieType = types.join(',');
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
       child: Row(
@@ -155,11 +183,11 @@ class MovieHighlightTitle extends StatelessWidget {
           Container(
             width: 100,
             height: 140,
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(15)),
+            decoration: BoxDecoration(
+              borderRadius: const BorderRadius.all(Radius.circular(15)),
               image: DecorationImage(
                 image: NetworkImage(
-                  'https://s2.bukalapak.com/img/7057854092/large/poster_film_dilan.jpeg',
+                  movieImageURL,
                 ),
               ),
             ),
@@ -170,16 +198,16 @@ class MovieHighlightTitle extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                const Text(
-                  'DILAN',
-                  style: TextStyle(
+                Text(
+                  title,
+                  style: const TextStyle(
                     fontSize: 21,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
                 const SizedBox(height: 10),
                 Text(
-                  'DRAMA ~ 103 mins ~ 13+',
+                  '$movieType ~ $duration ~$ages',
                   style: TextStyle(
                     fontSize: 12,
                     color: Colors.grey.shade500,
@@ -197,16 +225,19 @@ class MovieHighlightTitle extends StatelessWidget {
 class MovieHighlightImageCover extends StatelessWidget {
   const MovieHighlightImageCover({
     super.key,
+    required this.movieImageURL,
   });
+
+  final String movieImageURL;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 250,
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         image: DecorationImage(
           image: NetworkImage(
-            'https://s2.bukalapak.com/img/7057854092/large/poster_film_dilan.jpeg',
+            movieImageURL,
           ),
           fit: BoxFit.cover,
           alignment: Alignment.center,

@@ -2,11 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:movie_moka/src/core/presentation/widgets/moka_bouncing.dart';
 import 'package:movie_moka/src/core/presentation/widgets/moka_ink_well.dart';
+import 'package:movie_moka/src/features/movies/domain/entities/movie_detail_entity.dart';
+import 'package:movie_moka/src/features/movies/presentation/providers/movie_detail_provider.dart';
 import 'package:movie_moka/src/features/movies/presentation/widgets/movie_detail_content.dart';
+import 'package:provider/provider.dart';
+import 'package:skeletonizer/skeletonizer.dart';
+
+class MovieDetailState {
+  MovieDetailState({
+    required this.movieId,
+  });
+
+  final int movieId;
+}
 
 class MovieDetail extends StatefulWidget {
-  const MovieDetail({super.key});
+  const MovieDetail({
+    super.key,
+    required this.payload,
+  });
 
+  final MovieDetailState payload;
   static const routeName = 'movie detail';
   static const routePath = 'movie-detail';
 
@@ -15,30 +31,18 @@ class MovieDetail extends StatefulWidget {
 }
 
 class _MovieDetailState extends State<MovieDetail> {
-  final movieDetail = MovieDetailData(
-    title: 'Dilan',
-    rating: 4.5,
-    startDate: '2023-11-20',
-    imageURL:
-        'https://s2.bukalapak.com/img/7057854092/large/poster_film_dilan.jpeg',
-    totalReviewer: 104,
-    synopsis: '<p>Synopsis</p>',
-    ages: '13+',
-    duration: '114 min',
-    types: ['Drama', 'Romance'],
-    totalFavorite: 140,
-    totalWatchlist: 260,
-  );
-
   ScrollController _scrollController = ScrollController();
   Color arrowBackColor = Colors.white;
   bool showButtonBookNow = true;
+  bool isLoading = false;
+  MovieDetailEntity movieDetail = MovieDetailEntity();
 
   @override
   void initState() {
     super.initState();
     _scrollController = ScrollController();
     _scrollController.addListener(_scrollListener);
+    _getMovieDetail();
   }
 
   @override
@@ -67,15 +71,38 @@ class _MovieDetailState extends State<MovieDetail> {
     });
   }
 
+  Future<void> _getMovieDetail() async {
+    setState(() {
+      isLoading = true;
+    });
+    final movieId = widget.payload.movieId;
+    final provider = Provider.of<MovieDetailProvder>(context, listen: false);
+    final result = await provider.getMovieDetailData(movieId: movieId);
+    setState(() {
+      movieDetail = result;
+      isLoading = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Stack(
         children: [
-          MovieDetailContent(
-            scrollController: _scrollController,
-          ),
+          if (isLoading)
+            Skeletonizer(
+              enabled: isLoading,
+              child: MovieDetailContent(
+                scrollController: _scrollController,
+                movieDetail: movieDetail,
+              ),
+            )
+          else
+            MovieDetailContent(
+              scrollController: _scrollController,
+              movieDetail: movieDetail,
+            ),
           Positioned(
             top: 40,
             left: 10,
@@ -150,32 +177,4 @@ class _MovieDetailState extends State<MovieDetail> {
       ),
     );
   }
-}
-
-class MovieDetailData {
-  MovieDetailData({
-    required this.title,
-    required this.startDate,
-    required this.imageURL,
-    required this.rating,
-    required this.synopsis,
-    required this.totalReviewer,
-    this.ages,
-    this.duration,
-    this.types,
-    this.totalFavorite,
-    this.totalWatchlist,
-  });
-
-  final String title;
-  final String imageURL;
-  final String startDate;
-  final double rating;
-  final String synopsis;
-  final int totalReviewer;
-  String? ages;
-  String? duration;
-  List<String>? types;
-  int? totalFavorite;
-  int? totalWatchlist;
 }

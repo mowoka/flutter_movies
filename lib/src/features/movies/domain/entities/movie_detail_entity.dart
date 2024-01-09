@@ -1,4 +1,17 @@
-class MovieDetailEntity {}
+class MovieDetailEntity {
+  var id = 0;
+  var title = '';
+  var startDate = '';
+  var imageURL = '';
+  var rating = 0.0;
+  var synopsis = '';
+  var totalReviewer = '';
+  var ages = '';
+  var duration = '';
+  List<String> types = [];
+  var totalFavorite = 0;
+  var totalWatchlist = 0;
+}
 
 class MovieCinema {
   var title = 'Focal Point';

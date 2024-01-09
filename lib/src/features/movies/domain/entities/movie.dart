@@ -1,4 +1,5 @@
 class Movie {
+  var id = 0;
   var title = '';
   var rating = 0.0;
   var startDate = '';

@@ -4,6 +4,7 @@ Future<List<MovieModel>> httpGetMoviePlaying() async {
   final res = await Future.delayed(const Duration(seconds: 3), () {
     return [
       {
+        "id": 1,
         "title": "Dilan",
         "rating": 4.5,
         "startDate": "2023-11-20",
@@ -14,6 +15,7 @@ Future<List<MovieModel>> httpGetMoviePlaying() async {
         "duration": '120 min',
       },
       {
+        "id": 2,
         "title": "Matix: Croine a I'incroyable",
         "rating": 3.5,
         "startDate": "2023-11-22",
@@ -24,6 +26,7 @@ Future<List<MovieModel>> httpGetMoviePlaying() async {
         "duration": '110 min',
       },
       {
+        "id": 3,
         "title": "KADET 1947",
         "rating": 4.0,
         "startDate": "2023-11-21",
@@ -34,6 +37,7 @@ Future<List<MovieModel>> httpGetMoviePlaying() async {
         "duration": '140 min',
       },
       {
+        "id": 4,
         "title": "JOKER",
         "rating": 5.0,
         "startDate": "2023-11-25",
@@ -44,6 +48,7 @@ Future<List<MovieModel>> httpGetMoviePlaying() async {
         "duration": '121 min',
       },
       {
+        "id": 5,
         "title": "Bankit",
         "rating": 4.0,
         "startDate": "2023-11-15",
@@ -54,6 +59,7 @@ Future<List<MovieModel>> httpGetMoviePlaying() async {
         "duration": '98 min',
       },
       {
+        "id": 6,
         "title": "AKAL",
         "rating": 3.5,
         "startDate": '2023-12-15',
@@ -64,6 +70,7 @@ Future<List<MovieModel>> httpGetMoviePlaying() async {
         "duration": '121 min',
       },
       {
+        "id": 7,
         "title": "AVATAR",
         "rating": 5.0,
         "startDate": '2023-12-15',
@@ -74,6 +81,7 @@ Future<List<MovieModel>> httpGetMoviePlaying() async {
         "duration": '121 min',
       },
       {
+        "id": 8,
         "title": "MAGIC",
         "rating": 2.0,
         "startDate": '2023-12-12',
@@ -84,6 +92,7 @@ Future<List<MovieModel>> httpGetMoviePlaying() async {
         "duration": '121 min',
       },
       {
+        "id": 9,
         "title": "KITA NIKAH YUK!",
         "rating": 4.0,
         "startDate": '2023-12-17',
@@ -94,6 +103,7 @@ Future<List<MovieModel>> httpGetMoviePlaying() async {
         "duration": '121 min',
       },
       {
+        "id": 10,
         "title": "RAJAWALI",
         "rating": 3.0,
         "startDate": '2023-12-20',
@@ -104,6 +114,7 @@ Future<List<MovieModel>> httpGetMoviePlaying() async {
         "duration": '121 min',
       },
       {
+        "id": 11,
         "title": "KUNGFU PANDA 2",
         "rating": 5.0,
         "startDate": '2023-12-21',

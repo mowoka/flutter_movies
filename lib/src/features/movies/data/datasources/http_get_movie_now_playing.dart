@@ -4,6 +4,7 @@ Future<List<MovieModel>> httpGetMovieNowPlaying() async {
   final res = await Future.delayed(const Duration(seconds: 3), () {
     return [
       {
+        "id": 1,
         "title": "Dilan",
         "rating": 4.5,
         "startDate": "2023-11-20",
@@ -11,6 +12,7 @@ Future<List<MovieModel>> httpGetMovieNowPlaying() async {
             'https://s2.bukalapak.com/img/7057854092/large/poster_film_dilan.jpeg',
       },
       {
+        "id": 2,
         "title": "Matix: Croine a I'incroyable",
         "rating": 3.5,
         "startDate": "2023-11-22",
@@ -18,6 +20,7 @@ Future<List<MovieModel>> httpGetMovieNowPlaying() async {
             'https://www.originalfilmart.com/cdn/shop/products/the_matrix_1999_fr_original_film_art_a.jpg?v=1640646540',
       },
       {
+        "id": 3,
         "title": "KADET 1947",
         "rating": 4.0,
         "startDate": "2023-11-21",
@@ -25,6 +28,7 @@ Future<List<MovieModel>> httpGetMovieNowPlaying() async {
             'https://asset.kompas.com/crops/7Ubrj5X59RzzppNgNDS6x6gBRrM=/31x9:872x1131/300x400/data/photo/2021/10/29/617b75cc70698.jpeg',
       },
       {
+        "id": 4,
         "title": "JOKER",
         "rating": 5.0,
         "startDate": "2023-11-25",
@@ -32,6 +36,7 @@ Future<List<MovieModel>> httpGetMovieNowPlaying() async {
             'https://asset.kompas.com/crop/39x0:1051x1349/300x400/data/photo/2019/04/03/2579847035.jpg',
       },
       {
+        "id": 5,
         "title": "Bankit",
         "rating": 4.0,
         "startDate": "2023-11-15",

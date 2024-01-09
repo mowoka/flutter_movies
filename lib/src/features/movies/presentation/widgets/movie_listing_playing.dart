@@ -55,7 +55,12 @@ class _MovieListingPlayingState extends State<MovieListingPlaying> {
             for (final item in widget.movies)
               MokaInkWell(
                 onTap: () {
-                  GoRouter.of(context).pushNamed(MovieDetail.routeName);
+                  GoRouter.of(context).pushNamed(
+                    MovieDetail.routeName,
+                    queryParams: {
+                      "movieId": item.id.toString(),
+                    },
+                  );
                 },
                 child: GridMovieItem(
                   movieImageUrl: item.imageUrl,
@@ -75,7 +80,12 @@ class _MovieListingPlayingState extends State<MovieListingPlaying> {
           itemBuilder: (BuildContext context, int index) {
             return MokaInkWell(
               onTap: () {
-                GoRouter.of(context).pushNamed(MovieDetail.routeName);
+                GoRouter.of(context).pushNamed(
+                  MovieDetail.routeName,
+                  queryParams: {
+                    "movieId": widget.movies[index].id.toString(),
+                  },
+                );
               },
               child: ListMovieItem(
                 movieImageURL: widget.movies[index].imageUrl,

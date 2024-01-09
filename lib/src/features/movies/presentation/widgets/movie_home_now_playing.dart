@@ -84,7 +84,12 @@ class MovieNowPlayingContent extends StatelessWidget {
                   itemBuilder: (BuildContext context, int index) {
                     return MokaInkWell(
                       onTap: () {
-                        GoRouter.of(context).pushNamed(MovieDetail.routeName);
+                        GoRouter.of(context).pushNamed(
+                          MovieDetail.routeName,
+                          queryParams: {
+                            "movieId": movies[index].id.toString(),
+                          },
+                        );
                       },
                       child: Container(
                         padding: const EdgeInsets.only(left: 5, right: 5),

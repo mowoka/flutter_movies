@@ -25,8 +25,10 @@ import 'package:movie_moka/src/features/auth/presentation/routes/register.dart';
 import 'package:movie_moka/src/features/foods/presentation/routes/foods.dart';
 import 'package:movie_moka/src/features/maintenance/presentation/routes/maintenance.dart';
 import 'package:movie_moka/src/features/menu/presentation/routes/menu.dart';
+import 'package:movie_moka/src/features/movies/data/repository/movie_detail_impl.dart';
 import 'package:movie_moka/src/features/movies/data/repository/movie_home_impl.dart';
 import 'package:movie_moka/src/features/movies/data/repository/movie_listing_impl.dart';
+import 'package:movie_moka/src/features/movies/presentation/providers/movie_detail_provider.dart';
 import 'package:movie_moka/src/features/movies/presentation/providers/movie_home_provider.dart';
 import 'package:movie_moka/src/features/movies/presentation/providers/movie_listing_provider.dart';
 import 'package:movie_moka/src/features/movies/presentation/routes/movie_detail.dart';
@@ -59,6 +61,7 @@ class _MyAppState extends State<MyApp> {
   late final RegisterProvider _registerProvider;
   late final MovieHomeProvider _movieHomeProvider;
   late final MovieListingProvider _movieListingProvider;
+  late final MovieDetailProvder _movieDetailProvider;
 
   @override
   void initState() {
@@ -88,6 +91,7 @@ class _MyAppState extends State<MyApp> {
     final movieRepo = MovieListingRepositoryImpl(
       sharedPreferences: widget.sharedPreferences,
     );
+    final movieDetailRepo = MovieDetailRepositoryImpl();
 
     // register provider
     _bottomMenuProvier = BottomMenuProvier();
@@ -112,6 +116,9 @@ class _MyAppState extends State<MyApp> {
     );
     _movieListingProvider = MovieListingProvider(
       repository: movieRepo,
+    );
+    _movieDetailProvider = MovieDetailProvder(
+      repository: movieDetailRepo,
     );
   }
 
@@ -142,6 +149,9 @@ class _MyAppState extends State<MyApp> {
         ),
         ChangeNotifierProvider<MovieListingProvider>(
           create: (context) => _movieListingProvider,
+        ),
+        ChangeNotifierProvider<MovieDetailProvder>(
+          create: (context) => _movieDetailProvider,
         ),
       ],
       child: MaterialApp.router(
@@ -257,7 +267,11 @@ class _MyAppState extends State<MyApp> {
               pageBuilder: (context, state) {
                 return customTransitionPage(
                   pageKey: state.pageKey,
-                  child: const MovieDetail(),
+                  child: MovieDetail(
+                    payload: MovieDetailState(
+                      movieId: int.parse(state.queryParams["movieId"] ?? "0"),
+                    ),
+                  ),
                 );
               },
             ),
