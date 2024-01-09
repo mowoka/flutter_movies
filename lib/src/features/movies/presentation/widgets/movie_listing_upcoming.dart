@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:movie_moka/src/core/presentation/widgets/moka_ink_well.dart';
 import 'package:movie_moka/src/features/movies/domain/entities/movie.dart';
 import 'package:movie_moka/src/features/movies/domain/entities/movie_listing_entity.dart';
+import 'package:movie_moka/src/features/movies/presentation/routes/movie_detail.dart';
 
 class MovieListingUpcoming extends StatefulWidget {
   const MovieListingUpcoming({
@@ -48,10 +51,20 @@ class _MovieListingUpcomingState extends State<MovieListingUpcoming> {
           crossAxisCount: 2,
           children: <Widget>[
             for (final item in widget.upcomingMovies)
-              GridMovieItem(
-                movieImageUrl: item.imageUrl,
-                title: item.title,
-                totalFavorite: item.totalFavorite,
+              MokaInkWell(
+                onTap: () {
+                  GoRouter.of(context).pushNamed(
+                    MovieDetail.routeName,
+                    queryParams: {
+                      "movieId": item.id.toString(),
+                    },
+                  );
+                },
+                child: GridMovieItem(
+                  movieImageUrl: item.imageUrl,
+                  title: item.title,
+                  totalFavorite: item.totalFavorite,
+                ),
               ),
           ],
         ),
@@ -67,13 +80,23 @@ class _MovieListingUpcomingState extends State<MovieListingUpcoming> {
         child: ListView.separated(
           itemCount: widget.upcomingMovies.length,
           itemBuilder: (BuildContext context, int index) {
-            return ListMovieItem(
-              movieImageURL: widget.upcomingMovies[index].imageUrl,
-              title: widget.upcomingMovies[index].title,
-              totalFavorite: widget.upcomingMovies[index].totalFavorite,
-              ages: widget.upcomingMovies[index].ages,
-              duration: widget.upcomingMovies[index].duration,
-              types: widget.upcomingMovies[index].types,
+            return MokaInkWell(
+              onTap: () {
+                GoRouter.of(context).pushNamed(
+                  MovieDetail.routeName,
+                  queryParams: {
+                    "movieId": widget.upcomingMovies[index].id.toString(),
+                  },
+                );
+              },
+              child: ListMovieItem(
+                movieImageURL: widget.upcomingMovies[index].imageUrl,
+                title: widget.upcomingMovies[index].title,
+                totalFavorite: widget.upcomingMovies[index].totalFavorite,
+                ages: widget.upcomingMovies[index].ages,
+                duration: widget.upcomingMovies[index].duration,
+                types: widget.upcomingMovies[index].types,
+              ),
             );
           },
           separatorBuilder: (BuildContext context, int index) =>
