@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:movie_moka/src/core/presentation/widgets/moka_bouncing.dart';
 import 'package:movie_moka/src/core/presentation/widgets/moka_ink_well.dart';
-import 'package:movie_moka/src/core/utils/data/dummy_data.dart';
 import 'package:movie_moka/src/features/movies/domain/entities/movie_detail_entity.dart';
 import 'package:movie_moka/src/features/movies/presentation/providers/movie_detail_provider.dart';
 import 'package:movie_moka/src/features/movies/presentation/widgets/movie_detail_content.dart';
@@ -35,12 +34,15 @@ class _MovieDetailState extends State<MovieDetail> {
   ScrollController _scrollController = ScrollController();
   Color arrowBackColor = Colors.white;
   bool showButtonBookNow = true;
+  bool isLoading = false;
+  MovieDetailEntity movieDetail = MovieDetailEntity();
 
   @override
   void initState() {
     super.initState();
     _scrollController = ScrollController();
     _scrollController.addListener(_scrollListener);
+    _getMovieDetail();
   }
 
   @override
@@ -48,12 +50,6 @@ class _MovieDetailState extends State<MovieDetail> {
     _scrollController.removeListener(_scrollListener);
     _scrollController.dispose();
     super.dispose();
-  }
-
-  Future<MovieDetailEntity> _getMovieDetail() async {
-    final movieId = widget.payload.movieId;
-    final provider = Provider.of<MovieDetailProvder>(context, listen: false);
-    return await provider.getMovieDetailData(movieId: movieId);
   }
 
   void _scrollListener() {
@@ -75,38 +71,38 @@ class _MovieDetailState extends State<MovieDetail> {
     });
   }
 
+  Future<void> _getMovieDetail() async {
+    setState(() {
+      isLoading = true;
+    });
+    final movieId = widget.payload.movieId;
+    final provider = Provider.of<MovieDetailProvder>(context, listen: false);
+    final result = await provider.getMovieDetailData(movieId: movieId);
+    setState(() {
+      movieDetail = result;
+      isLoading = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Stack(
         children: [
-          FutureBuilder<MovieDetailEntity>(
-            future: _getMovieDetail(),
-            builder: (
-              BuildContext context,
-              AsyncSnapshot<MovieDetailEntity> snapshot,
-            ) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return Skeletonizer(
-                  enabled: true,
-                  child: MovieDetailContent(
-                    scrollController: _scrollController,
-                    movieDetail: dummyMovieDetail,
-                  ),
-                );
-              }
-
-              if (snapshot.data == null) {
-                return Container();
-              }
-
-              return MovieDetailContent(
+          if (isLoading)
+            Skeletonizer(
+              enabled: isLoading,
+              child: MovieDetailContent(
                 scrollController: _scrollController,
-                movieDetail: snapshot.data!,
-              );
-            },
-          ),
+                movieDetail: movieDetail,
+              ),
+            )
+          else
+            MovieDetailContent(
+              scrollController: _scrollController,
+              movieDetail: movieDetail,
+            ),
           Positioned(
             top: 40,
             left: 10,

@@ -24,19 +24,35 @@ class _MovieDetailContentState extends State<MovieDetailContent> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       controller: widget.scrollController,
-      child: const Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          MovieDetailHighlight(),
-          Divider(thickness: 3),
-          MovieDetailSynopsis(),
-          Divider(thickness: 3),
-          MovieDetailShow(),
-          Divider(thickness: 3),
-          MovieDetailSeatType(),
-        ],
-      ),
+      child: MovieDetailContentUI(movieDetail: widget.movieDetail),
+    );
+  }
+}
+
+class MovieDetailContentUI extends StatelessWidget {
+  const MovieDetailContentUI({
+    super.key,
+    required this.movieDetail,
+  });
+
+  final MovieDetailEntity movieDetail;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        MovieDetailHighlight(
+          movieDetail: movieDetail,
+        ),
+        const Divider(thickness: 3),
+        const MovieDetailSynopsis(),
+        const Divider(thickness: 3),
+        const MovieDetailShow(),
+        const Divider(thickness: 3),
+        const MovieDetailSeatType(),
+      ],
     );
   }
 }
