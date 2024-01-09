@@ -9,7 +9,9 @@ class MovieHomeFoodAndDrinks extends StatefulWidget {
 }
 
 class _MovieHomeFoodAndDrinksState extends State<MovieHomeFoodAndDrinks> {
-  List<String> foodPromo = ['promo_food_01.jpeg'];
+  List<String> foodPromo = [
+    'promo_food_01.jpeg',
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -27,12 +29,13 @@ class _MovieHomeFoodAndDrinksState extends State<MovieHomeFoodAndDrinks> {
                 subTitle: 'To complete your movie experience!',
                 showButton: false,
               ),
+              const SizedBox(height: 5),
               for (final promo in foodPromo)
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 5),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10),
-                    child: Image.asset('assets/foods/$promo'),
+                    child: Image.asset('assets/offers/$promo'),
                   ),
                 ),
             ],
