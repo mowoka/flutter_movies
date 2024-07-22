@@ -245,7 +245,7 @@ class GridMovieItem extends StatelessWidget {
         children: [
           Container(
             width: 300,
-            height: 240,
+            height: 250,
             decoration: BoxDecoration(
               borderRadius: const BorderRadius.all(Radius.circular(15)),
               image: DecorationImage(

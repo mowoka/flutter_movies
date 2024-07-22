@@ -113,6 +113,7 @@ class MovieNowPlayingContent extends StatelessWidget {
                             const SizedBox(height: 10),
                             Text(
                               movies[index].title,
+                              overflow: TextOverflow.ellipsis,
                               style: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w400,
